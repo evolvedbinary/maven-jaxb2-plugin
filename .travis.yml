@@ -10,9 +10,6 @@ hc3873BBm+ZHpK3Objz7LjsRJs6yB7qYbuOprUMmqBM6cLUBN/OQyRHeUnl+6fPJlkJ9HQ+KM5xDdlcq
 EaxgeVUdX1TrSheivqmeK8cqJdQMp1HLzlF/pG68kgKDNZ7QceNbxb+sxgzilrDEZ4AIu5eQEDmXmYdKwX5f2HSdA1gX1EH4KjfFHvEk17MyxgQZai+GdX1dhHV8uTKs+nBBiAXPwv+whohC8w0tNrOtfySA4B9y
 I5CtwUyQ1hccOr0iXaGvn4UhRCsC4rbJgFqLnRcYYRu4wNwo9xGJbs="
 
-install:
-  - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U
-  
 cache:
   directories:
     - $HOME/.m2
@@ -26,10 +23,10 @@ jobs:
     - stage: test
       jdk: openjdk8
       script:
-        - mvn test -B -DskipTests=true
+        - mvn clean install -B -V -U
       after_success:
         - mvn deploy --settings travis-settings.xml -DskipTests=true -B
     - stage: test
       jdk: openjdk11
       script:
-        - mvn test -B -DskipTests=true
+        - mvn clean install -B -V -U
