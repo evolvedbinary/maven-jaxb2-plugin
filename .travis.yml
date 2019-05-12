@@ -11,7 +11,7 @@ EaxgeVUdX1TrSheivqmeK8cqJdQMp1HLzlF/pG68kgKDNZ7QceNbxb+sxgzilrDEZ4AIu5eQEDmXmYdK
 I5CtwUyQ1hccOr0iXaGvn4UhRCsC4rbJgFqLnRcYYRu4wNwo9xGJbs="
 
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U
+  - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U
   
 cache:
   directories:
@@ -25,11 +25,11 @@ jobs:
   include:
     - stage: test
       jdk: openjdk8
-#      script:
-#        - mvn test -B
+      script:
+        - mvn test -B -DskipTests=true
       after_success:
         - mvn deploy --settings travis-settings.xml -DskipTests=true -B
     - stage: test
       jdk: openjdk11
-#      script:
-#        - mvn test -B
+      script:
+        - mvn test -B -DskipTests=true
