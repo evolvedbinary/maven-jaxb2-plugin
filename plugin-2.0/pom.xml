@@ -13,7 +13,7 @@
 	</prerequisites>
 	<dependencies>
 		<dependency>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
+  <groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-core</artifactId>
 		</dependency>
 		<dependency>
