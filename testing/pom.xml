@@ -4,7 +4,7 @@
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Testing</name>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-project</artifactId>
 		<version>0.14.1-SNAPSHOT</version>
 	</parent>
