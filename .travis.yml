@@ -4,13 +4,11 @@ language: java
 env:
   global:
     - SONATYPE_USERNAME=ph@phloc.com
-    - secure: "oUEHkOeRXBE5qpWMP9zcPvFE6r+AvUmmDdWcUYHSsFSFFUsP5te9UuBVayu6+ypxiV6gFwOWamtoBAweWt2ePQHR4
-UqKZcyVdLIvltFFJTB1W73wEXHd+fYQTWVc5KydiFSaUxEkLyJbVWjkt4CbI3MR7MpVpsleulFdsAxSgWauIBHpJN0JVAVdUohLk
-+6RnQIEqDcfRfrwuzthedVJDv8nqtDGdWL4Z0lVgngKorZCUqJ63myowMC2bXcSKz/ui2Xxd6blZXj+JJ2SPWLrzrJorTXj6lP+G
-+zaWOJ6/imyN1N6NNErt9JM4/5v7z9CfTCh1yALKZ6MsMA9koSHzYzp26UhJeEoRLO67QZmuCxU8Fdbo1j47O31WKkT9JBO8LMFQ
-8EYonU4SMDDt54ytR8bn9Uz56SM5WMu2jd9RQkt8YqwwvtmumWepGtwroJiOfy2mq06OKY5bQVLtqvpD4CjqVcQ2Q3Q49O8f+COH
-Rhw5uJfu8yezfP72WSqyZ7TOccUW7LNHgdMQrPyS7ruq21nPfge/4cN1JJF5WvnJ9SyBlGcSsuyIKClmhzUGszsOloLBS8Vane2K
-Cu34TJGDtbpqbFNWi7B4dG5ASX/tjVJ/xlU3R3Wa6PlcI9k1VgdTgEb43D6dr1i64gHERXIir4Nj++8mM3X3K8OaGf7CSg="
+    -   secure: "OEZDtvkNSbArhLnnwO5L5raqYw1dcI9e9oBZ0nWBSY2yG+O2r5ImcfuxkaNLhUwf5NY3tnF8guAMXZdgqD2ED3nrPypynEcNVa/UDE+dGjyswXTuMMBm7xixWcafi1tSOzBIWeVaDi1kwtUhaPVIN
+omWVtD8S8Z9G1r5cK6qdaCKGEzCGmRzCKtm3+FDJWsYItKa0xl+A4PChBRtigZVR5qV1/jv1ngVPPqIN0hgISSNIGebmlYcI9Z/ejs+zuOUIuI4qnCAoANLZcic7HVfwjsU5hR3sBeeNts2+2MMVYDK2tLr6KBSX
+hc3873BBm+ZHpK3Objz7LjsRJs6yB7qYbuOprUMmqBM6cLUBN/OQyRHeUnl+6fPJlkJ9HQ+KM5xDdlcqRAkIn0PNGYwNu+/l4Li7j0qHKjIWltASNKbdQa1RJpZZwZ8CyGu9v9zzd+nKuMDxl2Tnpvqv6/toQ7Nv
+EaxgeVUdX1TrSheivqmeK8cqJdQMp1HLzlF/pG68kgKDNZ7QceNbxb+sxgzilrDEZ4AIu5eQEDmXmYdKwX5f2HSdA1gX1EH4KjfFHvEk17MyxgQZai+GdX1dhHV8uTKs+nBBiAXPwv+whohC8w0tNrOtfySA4B9y
+I5CtwUyQ1hccOr0iXaGvn4UhRCsC4rbJgFqLnRcYYRu4wNwo9xGJbs="
 
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -U
@@ -28,9 +26,9 @@ jobs:
     - stage: test
       jdk: openjdk8
       script:
-        - mvn test -B -P coverage
+        - mvn test -B
       after_success:
-        - mvn deploy --settings travis-settings.xml -DskipTests=true -B -P travis-deploy
+        - mvn deploy --settings travis-settings.xml -DskipTests=true -B
     - stage: test
       jdk: openjdk11
       script:
