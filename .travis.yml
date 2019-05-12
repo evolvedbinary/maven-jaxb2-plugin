@@ -25,11 +25,11 @@ jobs:
   include:
     - stage: test
       jdk: openjdk8
-      script:
-        - mvn test -B
+#      script:
+#        - mvn test -B
       after_success:
         - mvn deploy --settings travis-settings.xml -DskipTests=true -B
     - stage: test
       jdk: openjdk11
-      script:
-        - mvn test -B
+#      script:
+#        - mvn test -B
