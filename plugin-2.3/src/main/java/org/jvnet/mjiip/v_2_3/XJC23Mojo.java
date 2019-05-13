@@ -61,12 +61,14 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     for (final InputSource x : options.getGrammars ())
     {
       getLog ().info ("  Next InputSource");
-      getLog ().info ("    publicID: " + x.getPublicId ());
-      getLog ().info ("    systemID: " + x.getSystemId ());
-      getLog ().info ("    encoding: " + x.getEncoding ());
-      getLog ().info ("    byteStream: " + x.getByteStream ());
-      getLog ().info ("    charStream: " + x.getCharacterStream ());
+      if (x.getPublicId () != null)
+        getLog ().info ("    publicID: " + x.getPublicId ());
+      if (x.getSystemId () != null)
+        getLog ().info ("    systemID: " + x.getSystemId ());
+      if (x.getEncoding () != null)
+        getLog ().info ("    encoding: " + x.getEncoding ());
     }
+    getLog ().info ("Entity resolver: " + options.entityResolver);
     final Model model = ModelLoader.load (options,
                                           new JCodeModel (),
                                           new LoggingErrorReceiver ("Error while parsing schema(s).",
