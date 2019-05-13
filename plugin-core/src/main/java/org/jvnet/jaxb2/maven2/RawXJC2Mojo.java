@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -834,8 +835,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
         if (schemaDirectory.isDirectory ())
         {
           getLog ().info ("schemaDirectory = " + schemaDirectory);
-          getLog ().info ("schemaIncludes = " + getSchemaIncludes ());
-          getLog ().info ("schemaExcludes = " + getSchemaExcludes ());
+          getLog ().info ("schemaIncludes = " + Arrays.toString (getSchemaIncludes ()));
+          getLog ().info ("schemaExcludes = " + Arrays.toString (getSchemaExcludes ()));
           getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
           this.schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
                                                             schemaDirectory,
