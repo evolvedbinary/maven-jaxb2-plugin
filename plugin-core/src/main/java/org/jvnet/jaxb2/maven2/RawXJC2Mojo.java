@@ -828,16 +828,22 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       if (schemaDirectory == null || !schemaDirectory.exists ())
       {
         this.schemaFiles = Collections.emptyList ();
+        getLog ().info ("schemaFiles is empty, because schemaDirectory configuration is crap");
       }
       else
         if (schemaDirectory.isDirectory ())
         {
+          getLog ().info ("schemaDirectory = " + schemaDirectory);
+          getLog ().info ("schemaIncludes = " + getSchemaIncludes ());
+          getLog ().info ("schemaExcludes = " + getSchemaExcludes ());
+          getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
           this.schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
                                                             schemaDirectory,
                                                             getSchemaIncludes (),
                                                             getSchemaExcludes (),
                                                             !getDisableDefaultExcludes ());
 
+          getLog ().info ("schemaFiles (calced) = " + this.schemaFiles);
         }
         else
         {
