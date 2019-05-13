@@ -2,6 +2,7 @@ package org.jvnet.mjiip.v_2_3;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -21,6 +22,8 @@ import com.sun.tools.xjc.ModelLoader;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.Outline;
+import com.sun.xml.xsom.XSSchema;
+import com.sun.xml.xsom.XSSchemaSet;
 
 /**
  * JAXB 2.x Mojo.
@@ -72,6 +75,23 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
 
     if (model == null)
       throw new MojoExecutionException ("Unable to parse input schema(s). Error messages should have been provided.");
+    try
+    {
+      final Field f = model.getClass ().getDeclaredField ("schemaComponent");
+      final XSSchemaSet xs = (XSSchemaSet) f.get (model);
+      getLog ().info ("schemaComponent = " + xs);
+      if (xs != null)
+      {
+        final Iterator <XSSchema> it = xs.iterateSchema ();
+        while (it.hasNext ())
+        {
+          final XSSchema a = it.next ();
+          getLog ().info ("  XSSchema = " + a);
+        }
+      }
+    }
+    catch (final Exception ex)
+    {}
     return model;
   }
 
