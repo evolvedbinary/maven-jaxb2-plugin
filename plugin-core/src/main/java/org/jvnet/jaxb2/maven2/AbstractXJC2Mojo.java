@@ -422,14 +422,14 @@ public abstract class AbstractXJC2Mojo<O> extends AbstractMojo implements
 	 * Provides the class name of the catalog resolver.
 	 */
 	@Parameter(property = "maven.xjc2.catalogResolver")
-	protected String catalogResolver = null;
+	protected String m_catalogResolver = null;
 
 	public String getCatalogResolver() {
-		return catalogResolver;
+		return m_catalogResolver;
 	}
 
 	public void setCatalogResolver(String catalogResolver) {
-		this.catalogResolver = catalogResolver;
+		this.m_catalogResolver = catalogResolver;
 	}
 
 	/**

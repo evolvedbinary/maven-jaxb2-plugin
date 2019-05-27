@@ -22,6 +22,7 @@ import com.sun.tools.xjc.ModelLoader;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.Outline;
+import com.sun.tools.xjc.reader.xmlschema.parser.SchemaConstraintChecker;
 import com.sun.xml.xsom.XSSchema;
 import com.sun.xml.xsom.XSSchemaSet;
 
@@ -69,11 +70,19 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
         getLog ().info ("    encoding: " + x.getEncoding ());
     }
     getLog ().info ("Entity resolver: " + options.entityResolver);
-    final Model model = ModelLoader.load (options,
-                                          new JCodeModel (),
-                                          new LoggingErrorReceiver ("Error while parsing schema(s).",
-                                                                    getLog (),
-                                                                    getVerbose ()));
+
+    final LoggingErrorReceiver er = new LoggingErrorReceiver ("Error while parsing schema(s).",
+                                                              getLog (),
+                                                              getVerbose ());
+    if (true)
+    {
+      // Fake check
+      final InputSource [] schemas = options.getGrammars ();
+      if (!SchemaConstraintChecker.check (schemas, er, getEntityResolver (), false))
+        getLog ().error ("SchemaConstraintChecker failed");
+    }
+
+    final Model model = ModelLoader.load (options, new JCodeModel (), er);
 
     if (model == null)
       throw new MojoExecutionException ("Unable to parse input schema(s). Error messages should have been provided.");
@@ -112,10 +121,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     {
       throw new MojoExecutionException ("Failed to compile input schema(s)! Error messages should have been provided.");
     }
-    else
-    {
-      return outline;
-    }
+    return outline;
   }
 
   protected void writeCode (final Outline outline) throws MojoExecutionException
@@ -195,7 +201,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     }
   }
 
-  private boolean isRelevantPackage (final JPackage _package)
+  private static boolean isRelevantPackage (final JPackage _package)
   {
     if (_package.propertyFiles ().hasNext ())
     {
