@@ -153,6 +153,12 @@ public class IOUtils
    */
   private static List <File> reorderFiles (final List <File> resolvedFiles, final String [] includes, final Log aLogger)
   {
+    if (includes == null || includes.length == 0)
+    {
+      // return "as is"
+      return resolvedFiles;
+    }
+
     final List <File> ret = new ArrayList <> (resolvedFiles.size ());
     for (final String inc : includes)
     {
@@ -168,7 +174,8 @@ public class IOUtils
           if (resFile.getAbsolutePath ().endsWith (sUnifiedInclude))
             matches.add (resFile);
 
-        aLogger.info ("Include '" + inc + "' was unified to '" + sUnifiedInclude + "' and matched to: " + matches);
+        if (aLogger != null)
+          aLogger.info ("Include '" + inc + "' was unified to '" + sUnifiedInclude + "' and matched to: " + matches);
 
         for (final File match : matches)
         {
@@ -184,7 +191,8 @@ public class IOUtils
     // Add all remaining resolved files in the order "as is"
     ret.addAll (resolvedFiles);
 
-    aLogger.info ("The resulting List is therefore: " + ret);
+    if (aLogger != null)
+      aLogger.info ("The resulting List is therefore: " + ret);
 
     return ret;
   }
