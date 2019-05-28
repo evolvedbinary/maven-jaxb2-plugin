@@ -143,13 +143,21 @@ public class IOUtils
   /**
    * Reorder the result of "scanner.getIncludedFile" so that the order of the
    * source includes is maintained as good as possible. Source wildcard matches
-   * are postponed to the end.
+   * are postponed to the end.<br>
+   * Examples:<br>
+   * If the includes contain [a, b, c] and the resulting list should be in that
+   * order.<br>
+   * If the includes contain [a, b*, c] the resulting list should be [a, c,
+   * matches-of(b*)]
    *
    * @param resolvedFiles
-   *        resolved files from scanner.getIncludedFiles
+   *        resolved files from scanner.getIncludedFiles. May not be
+   *        <code>null</code>.
    * @param includes
-   *        The source includes in the correct order
-   * @return
+   *        The source includes in the correct order. May be <code>null</code>
+   *        or empty.
+   * @return The ordered list of files, that tries to take the source order as
+   *         good as possible
    */
   private static List <File> reorderFiles (final List <File> resolvedFiles, final String [] includes, final Log aLogger)
   {
