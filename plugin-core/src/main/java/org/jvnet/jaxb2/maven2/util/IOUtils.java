@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -97,7 +98,11 @@ public class IOUtils
     {
       scanner = buildContext.newScanner (directory, true);
       if (aLogger != null)
+      {
         aLogger.accept ("Created scanner from buildContext: " + scanner);
+        if (scanner instanceof DirectoryScanner)
+          aLogger.accept ("  BaseDir=" + ((DirectoryScanner) scanner).getBasedir ().getAbsolutePath ());
+      }
     }
     else
     {
@@ -117,7 +122,7 @@ public class IOUtils
     scanner.scan ();
 
     if (aLogger != null)
-      aLogger.accept ("Scanner included files: " + scanner.getIncludedFiles ());
+      aLogger.accept ("Scanner included files: " + Arrays.toString (scanner.getIncludedFiles ()));
 
     final List <File> files = new ArrayList <> ();
     for (final String name : scanner.getIncludedFiles ())
