@@ -132,6 +132,60 @@ public class IOUtils
       files.add (new File (directory, name).getCanonicalFile ());
     }
 
-    return files;
+    return reorderFiles (files, includes, aLogger);
+  }
+
+  private static boolean isWildcard (final String s)
+  {
+    return s.indexOf ('*') >= 0 || s.indexOf ('?') >= 0;
+  }
+
+  /**
+   * Reorder the result of "scanner.getIncludedFile" so that the order of the
+   * source includes is maintained as good as possible. Source wildcard matches
+   * are postponed to the end.
+   *
+   * @param resolvedFiles
+   *        resolved files from scanner.getIncludedFiles
+   * @param includes
+   *        The source includes in the correct order
+   * @return
+   */
+  private static List <File> reorderFiles (final List <File> resolvedFiles, final String [] includes, final Log aLogger)
+  {
+    final List <File> ret = new ArrayList <> (resolvedFiles.size ());
+    for (final String inc : includes)
+    {
+      // Only deal with fixed files
+      if (!isWildcard (inc))
+      {
+        // Ensure to use the system path separator
+        final String sUnifiedInclude = inc.replace ('\\', File.separatorChar).replace ('/', File.separatorChar);
+
+        // Find all matches in the resolved files list
+        final List <File> matches = new ArrayList <> ();
+        for (final File resFile : resolvedFiles)
+          if (resFile.getAbsolutePath ().endsWith (sUnifiedInclude))
+            matches.add (resFile);
+
+        aLogger.info ("Include '" + inc + "' was unified to '" + sUnifiedInclude + "' and matched to: " + matches);
+
+        for (final File match : matches)
+        {
+          // Add all matches to the result list
+          ret.add (match);
+
+          // Remove from the main list
+          resolvedFiles.remove (match);
+        }
+      }
+    }
+
+    // Add all remaining resolved files in the order "as is"
+    ret.addAll (resolvedFiles);
+
+    aLogger.info ("The resulting List is therefore: " + ret);
+
+    return ret;
   }
 }
