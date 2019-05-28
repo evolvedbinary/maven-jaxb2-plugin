@@ -1641,7 +1641,13 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
 
   protected void cleanPackageDirectory (final File packageDirectory)
   {
-    final File [] files = packageDirectory.listFiles ((FileFilter) file -> file.isFile ());
+    final File [] files = packageDirectory.listFiles (new FileFilter ()
+    {
+      public boolean accept (final File aPathname)
+      {
+        return aPathname.isFile ();
+      }
+    });
     if (files != null)
     {
       for (final File file : files)

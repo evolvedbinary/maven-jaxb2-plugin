@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
+import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.Scanner;
 import org.jvnet.jaxb2.maven2.util.CollectionUtils.Function;
@@ -50,14 +50,18 @@ public class IOUtils
     return new InputSource (StringUtils.escapeSpace (uri.toString ()));
   }
 
-  public static final Function <File, URL> GET_URL = file -> {
-    try
+  public static final Function <File, URL> GET_URL = new Function <File, URL> ()
+  {
+    public URL eval (final File file)
     {
-      return file.toURI ().toURL ();
-    }
-    catch (final MalformedURLException muex)
-    {
-      throw new RuntimeException (muex);
+      try
+      {
+        return file.toURI ().toURL ();
+      }
+      catch (final MalformedURLException muex)
+      {
+        throw new RuntimeException (muex);
+      }
     }
   };
 
@@ -86,7 +90,7 @@ public class IOUtils
                                                    final String [] includes,
                                                    final String [] excludes,
                                                    final boolean defaultExcludes,
-                                                   final Consumer <? super String> aLogger) throws IOException
+                                                   final Log aLogger) throws IOException
   {
     if (!directory.exists ())
     {
@@ -99,9 +103,9 @@ public class IOUtils
       scanner = buildContext.newScanner (directory, true);
       if (aLogger != null)
       {
-        aLogger.accept ("Created scanner from buildContext: " + scanner);
+        aLogger.info ("Created scanner from buildContext: " + scanner);
         if (scanner instanceof DirectoryScanner)
-          aLogger.accept ("  BaseDir=" + ((DirectoryScanner) scanner).getBasedir ().getAbsolutePath ());
+          aLogger.info ("  BaseDir=" + ((DirectoryScanner) scanner).getBasedir ().getAbsolutePath ());
       }
     }
     else
@@ -110,7 +114,7 @@ public class IOUtils
       directoryScanner.setBasedir (directory.getAbsoluteFile ());
       scanner = directoryScanner;
       if (aLogger != null)
-        aLogger.accept ("Created DirectoryScanner as scanner: " + scanner);
+        aLogger.info ("Created DirectoryScanner as scanner: " + scanner);
     }
     scanner.setIncludes (includes);
     scanner.setExcludes (excludes);
@@ -122,7 +126,7 @@ public class IOUtils
     scanner.scan ();
 
     if (aLogger != null)
-      aLogger.accept ("Scanner included files: " + Arrays.toString (scanner.getIncludedFiles ()));
+      aLogger.info ("Scanner included files: " + Arrays.toString (scanner.getIncludedFiles ()));
 
     final List <File> files = new ArrayList <> ();
     for (final String name : scanner.getIncludedFiles ())

@@ -843,7 +843,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                               getSchemaIncludes (),
                                                               getSchemaExcludes (),
                                                               !getDisableDefaultExcludes (),
-                                                              getLog ()::info);
+                                                              getLog ());
 
           getLog ().info ("schemaFiles (calced) = " + this.m_schemaFiles);
         }
@@ -1228,7 +1228,13 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       return true;
     }
 
-    final Function <URI, Long> LAST_MODIFIED = uri -> getURILastModifiedResolver ().getLastModified (uri);
+    final Function <URI, Long> LAST_MODIFIED = new Function <URI, Long> ()
+    {
+      public Long eval (final URI uri)
+      {
+        return getURILastModifiedResolver ().getLastModified (uri);
+      }
+    };
 
     getLog ().debug (MessageFormat.format ("Checking the last modification timestamp of the source resources [{0}].",
                                            dependsURIs));
