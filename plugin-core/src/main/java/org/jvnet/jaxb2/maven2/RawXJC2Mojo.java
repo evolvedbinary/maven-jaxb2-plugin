@@ -835,11 +835,13 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
           getLog ().info ("schemaIncludes = " + Arrays.toString (getSchemaIncludes ()));
           getLog ().info ("schemaExcludes = " + Arrays.toString (getSchemaExcludes ()));
           getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
+          getLog ().info ("BuildContext is present: " + getBuildContext ());
           this.m_schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
                                                               schemaDirectory,
                                                               getSchemaIncludes (),
                                                               getSchemaExcludes (),
-                                                              !getDisableDefaultExcludes ());
+                                                              !getDisableDefaultExcludes (),
+                                                              getLog ()::info);
 
           getLog ().info ("schemaFiles (calced) = " + this.m_schemaFiles);
         }
@@ -872,7 +874,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                                bindingDirectory,
                                                                getBindingIncludes (),
                                                                getBindingExcludes (),
-                                                               !getDisableDefaultExcludes ());
+                                                               !getDisableDefaultExcludes (),
+                                                               null);
         }
         else
         {
@@ -920,7 +923,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                                              getProject ().getBasedir (),
                                                                              getOtherDependsIncludes (),
                                                                              getOtherDependsExcludes (),
-                                                                             !getDisableDefaultExcludes ());
+                                                                             !getDisableDefaultExcludes (),
+                                                                             null);
         for (final File file : otherDependsFiles)
         {
           if (file != null)
@@ -951,7 +955,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                                        getGenerateDirectory (),
                                                                        getProduces (),
                                                                        new String [0],
-                                                                       !getDisableDefaultExcludes ());
+                                                                       !getDisableDefaultExcludes (),
+                                                                       null);
       if (producesFiles != null)
       {
         for (final File producesFile : producesFiles)
@@ -1221,13 +1226,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       return true;
     }
 
-    final Function <URI, Long> LAST_MODIFIED = new Function <URI, Long> ()
-    {
-      public Long eval (final URI uri)
-      {
-        return getURILastModifiedResolver ().getLastModified (uri);
-      }
-    };
+    final Function <URI, Long> LAST_MODIFIED = uri -> getURILastModifiedResolver ().getLastModified (uri);
 
     getLog ().debug (MessageFormat.format ("Checking the last modification timestamp of the source resources [{0}].",
                                            dependsURIs));
