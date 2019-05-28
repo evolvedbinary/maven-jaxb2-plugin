@@ -104,8 +104,6 @@ public class IOUtils
       if (aLogger != null)
       {
         aLogger.info ("Created scanner from buildContext: " + scanner);
-        if (scanner instanceof DirectoryScanner)
-          aLogger.info ("  BaseDir=" + ((DirectoryScanner) scanner).getBasedir ().getAbsolutePath ());
       }
     }
     else
