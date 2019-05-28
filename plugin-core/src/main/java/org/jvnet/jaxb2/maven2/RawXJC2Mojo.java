@@ -832,8 +832,9 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
         if (schemaDirectory.isDirectory ())
         {
           getLog ().info ("schemaDirectory = " + schemaDirectory);
-          getLog ().info ("schemaDirectory.list() = " + Arrays.toString (schemaDirectory.list ()));
-          getLog ().info ("schemaDirectory.listFiles() = " + Arrays.toString (schemaDirectory.listFiles ()));
+          final File f = new File (schemaDirectory, "common");
+          if (f.exists ())
+            getLog ().info ("schemaDirectory.list() = " + Arrays.toString (f.list ()));
           getLog ().info ("schemaIncludes = " + Arrays.toString (getSchemaIncludes ()));
           getLog ().info ("schemaExcludes = " + Arrays.toString (getSchemaExcludes ()));
           getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
