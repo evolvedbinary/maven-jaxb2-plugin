@@ -831,14 +831,17 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       else
         if (schemaDirectory.isDirectory ())
         {
-          getLog ().info ("schemaDirectory = " + schemaDirectory);
-          final File f = new File (schemaDirectory, "common");
-          if (f.exists ())
-            getLog ().info ("schemaDirectory.list() = " + Arrays.toString (f.list ()));
-          getLog ().info ("schemaIncludes = " + Arrays.toString (getSchemaIncludes ()));
-          getLog ().info ("schemaExcludes = " + Arrays.toString (getSchemaExcludes ()));
-          getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
-          getLog ().info ("BuildContext= " + getBuildContext ());
+          if (getVerbose ())
+          {
+            getLog ().info ("schemaDirectory = " + schemaDirectory);
+            final File f = new File (schemaDirectory, "common");
+            if (f.exists ())
+              getLog ().info ("schemaDirectory.list() = " + Arrays.toString (f.list ()));
+            getLog ().info ("schemaIncludes = " + Arrays.toString (getSchemaIncludes ()));
+            getLog ().info ("schemaExcludes = " + Arrays.toString (getSchemaExcludes ()));
+            getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
+            getLog ().info ("BuildContext= " + getBuildContext ());
+          }
           this.m_schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
                                                               schemaDirectory,
                                                               getSchemaIncludes (),
@@ -846,7 +849,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                               !getDisableDefaultExcludes (),
                                                               getLog ());
 
-          getLog ().info ("schemaFiles (calced) = " + this.m_schemaFiles);
+          if (getVerbose ())
+            getLog ().info ("schemaFiles (calced) = " + this.m_schemaFiles);
         }
         else
         {
@@ -986,21 +990,23 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
   protected void logConfiguration () throws MojoExecutionException
   {
     super.logConfiguration ();
-    // TODO clean up
-    getLog ().info ("catalogURIs (calculated):" + getCatalogURIs ());
-    getLog ().info ("resolvedCatalogURIs (calculated):" + getResolvedCatalogURIs ());
-    getLog ().info ("schemaFiles (calculated):" + getSchemaFiles ());
-    getLog ().info ("schemaURIs (calculated):" + getSchemaURIs ());
-    getLog ().info ("resolvedSchemaURIs (calculated):" + getResolvedSchemaURIs ());
-    getLog ().info ("bindingFiles (calculated):" + getBindingFiles ());
-    getLog ().info ("bindingURIs (calculated):" + getBindingURIs ());
-    getLog ().info ("resolvedBindingURIs (calculated):" + getResolvedBindingURIs ());
-    getLog ().info ("xjcPluginArtifacts (resolved):" + getXjcPluginArtifacts ());
-    getLog ().info ("xjcPluginFiles (resolved):" + getXjcPluginFiles ());
-    getLog ().info ("xjcPluginURLs (resolved):" + getXjcPluginURLs ());
-    getLog ().info ("episodeArtifacts (resolved):" + getEpisodeArtifacts ());
-    getLog ().info ("episodeFiles (resolved):" + getEpisodeFiles ());
-    getLog ().info ("dependsURIs (resolved):" + getDependsURIs ());
+    if (getVerbose ())
+    {
+      getLog ().info ("catalogURIs (calculated):" + getCatalogURIs ());
+      getLog ().info ("resolvedCatalogURIs (calculated):" + getResolvedCatalogURIs ());
+      getLog ().info ("schemaFiles (calculated):" + getSchemaFiles ());
+      getLog ().info ("schemaURIs (calculated):" + getSchemaURIs ());
+      getLog ().info ("resolvedSchemaURIs (calculated):" + getResolvedSchemaURIs ());
+      getLog ().info ("bindingFiles (calculated):" + getBindingFiles ());
+      getLog ().info ("bindingURIs (calculated):" + getBindingURIs ());
+      getLog ().info ("resolvedBindingURIs (calculated):" + getResolvedBindingURIs ());
+      getLog ().info ("xjcPluginArtifacts (resolved):" + getXjcPluginArtifacts ());
+      getLog ().info ("xjcPluginFiles (resolved):" + getXjcPluginFiles ());
+      getLog ().info ("xjcPluginURLs (resolved):" + getXjcPluginURLs ());
+      getLog ().info ("episodeArtifacts (resolved):" + getEpisodeArtifacts ());
+      getLog ().info ("episodeFiles (resolved):" + getEpisodeFiles ());
+      getLog ().info ("dependsURIs (resolved):" + getDependsURIs ());
+    }
   }
 
   private void collectBindingUrisFromDependencies (final List <URI> bindingUris) throws MojoExecutionException
@@ -1107,12 +1113,14 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
   private void setupEntityResolver ()
   {
     this.m_entityResolver = createEntityResolver (getCatalogResolverInstance ());
-    getLog ().info ("EntityResolver set to " + this.m_entityResolver);
+    if (getVerbose ())
+      getLog ().info ("EntityResolver set to " + this.m_entityResolver);
   }
 
   protected EntityResolver createEntityResolver (final CatalogResolver catalogResolver)
   {
-    getLog ().info ("EntityResolver using catalogResolver " + this.m_catalogResolver);
+    if (getVerbose ())
+      getLog ().info ("EntityResolver using catalogResolver " + this.m_catalogResolver);
     final EntityResolver entityResolver = new ReResolvingEntityResolverWrapper (catalogResolver);
     return entityResolver;
   }
@@ -1136,12 +1144,14 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     }
     if (getCatalogResolver () == null)
     {
-      getLog ().info ("Using new MavenCatalogResolver");
+      if (getVerbose ())
+        getLog ().info ("Using new MavenCatalogResolver");
       return new MavenCatalogResolver (catalogManager, this, getLog ());
     }
 
     final String catalogResolverClassName = getCatalogResolver ().trim ();
-    getLog ().info ("Using catalogResolverClassName '" + catalogResolverClassName + "'");
+    if (getVerbose ())
+      getLog ().info ("Using catalogResolverClassName '" + catalogResolverClassName + "'");
     return createCatalogResolverByClassName (catalogResolverClassName);
   }
 
@@ -1229,13 +1239,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       return true;
     }
 
-    final Function <URI, Long> LAST_MODIFIED = new Function <URI, Long> ()
-    {
-      public Long eval (final URI uri)
-      {
-        return getURILastModifiedResolver ().getLastModified (uri);
-      }
-    };
+    final Function <URI, Long> LAST_MODIFIED = uri -> getURILastModifiedResolver ().getLastModified (uri);
 
     getLog ().debug (MessageFormat.format ("Checking the last modification timestamp of the source resources [{0}].",
                                            dependsURIs));
@@ -1514,9 +1518,11 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       {
         try
         {
-          getLog ().info ("Now parsing catalog " + catalogURI.toURL ());
+          if (getVerbose ())
+            getLog ().info ("Now parsing catalog " + catalogURI.toURL ());
           getCatalogResolverInstance ().getCatalog ().parseCatalog (catalogURI.toURL ());
-          getLog ().info ("Successfully parsed catalog " + catalogURI.toURL ());
+          if (getVerbose ())
+            getLog ().info ("Successfully parsed catalog " + catalogURI.toURL ());
         }
         catch (final IOException ioex)
         {
@@ -1530,23 +1536,32 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
   private List <InputSource> getInputSources (final List <URI> uris) throws IOException, SAXException
   {
-    getLog ().info ("getInputSources total: " + uris);
+    if (getVerbose ())
+      getLog ().info ("getInputSources total: " + uris);
     final List <InputSource> inputSources = new ArrayList <> (uris.size ());
     for (final URI uri : uris)
     {
-      getLog ().info ("getInputSources of: " + uri);
+      if (getVerbose ())
+        getLog ().info ("getInputSources of: " + uri);
       InputSource inputSource = IOUtils.getInputSource (uri);
-      getLog ().info ("getInputSources uses: " + inputSource);
-      getLog ().info ("            publicID: " + inputSource.getPublicId ());
-      getLog ().info ("            systemID: " + inputSource.getSystemId ());
+      if (getVerbose ())
+      {
+        getLog ().info ("getInputSources uses: " + inputSource);
+        getLog ().info ("            publicID: " + inputSource.getPublicId ());
+        getLog ().info ("            systemID: " + inputSource.getSystemId ());
+      }
       final InputSource resolvedInputSource = getEntityResolver ().resolveEntity (inputSource.getPublicId (),
                                                                                   inputSource.getSystemId ());
-      getLog ().info ("getInputSources resolved to: " + resolvedInputSource);
+      if (getVerbose ())
+        getLog ().info ("getInputSources resolved to: " + resolvedInputSource);
       if (resolvedInputSource != null)
       {
         inputSource = resolvedInputSource;
-        getLog ().info ("                   publicID: " + resolvedInputSource.getPublicId ());
-        getLog ().info ("                   systemID: " + resolvedInputSource.getSystemId ());
+        if (getVerbose ())
+        {
+          getLog ().info ("                   publicID: " + resolvedInputSource.getPublicId ());
+          getLog ().info ("                   systemID: " + resolvedInputSource.getSystemId ());
+        }
       }
       inputSources.add (inputSource);
     }

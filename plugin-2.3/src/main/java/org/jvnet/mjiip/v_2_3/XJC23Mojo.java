@@ -57,19 +57,19 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     if (getVerbose ())
     {
       getLog ().info ("Parsing input schema(s)...");
+      getLog ().info ("Input schemas: " + Arrays.toString (options.getGrammars ()));
+      for (final InputSource x : options.getGrammars ())
+      {
+        getLog ().info ("  Next InputSource");
+        if (x.getPublicId () != null)
+          getLog ().info ("    publicID: " + x.getPublicId ());
+        if (x.getSystemId () != null)
+          getLog ().info ("    systemID: " + x.getSystemId ());
+        if (x.getEncoding () != null)
+          getLog ().info ("    encoding: " + x.getEncoding ());
+      }
+      getLog ().info ("Entity resolver: " + options.entityResolver);
     }
-    getLog ().info ("Input schemas: " + Arrays.toString (options.getGrammars ()));
-    for (final InputSource x : options.getGrammars ())
-    {
-      getLog ().info ("  Next InputSource");
-      if (x.getPublicId () != null)
-        getLog ().info ("    publicID: " + x.getPublicId ());
-      if (x.getSystemId () != null)
-        getLog ().info ("    systemID: " + x.getSystemId ());
-      if (x.getEncoding () != null)
-        getLog ().info ("    encoding: " + x.getEncoding ());
-    }
-    getLog ().info ("Entity resolver: " + options.entityResolver);
 
     final LoggingErrorReceiver er = new LoggingErrorReceiver ("Error while parsing schema(s).",
                                                               getLog (),
