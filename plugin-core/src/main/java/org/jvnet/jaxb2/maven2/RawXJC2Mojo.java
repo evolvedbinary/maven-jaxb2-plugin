@@ -987,7 +987,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
    * is true.
    */
   @Override
-  protected void logConfiguration () throws MojoExecutionException
+  protected void logConfiguration ()
   {
     super.logConfiguration ();
     if (getVerbose ())

@@ -90,6 +90,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     {
       final Field f = model.getClass ().getDeclaredField ("schemaComponent");
       final XSSchemaSet xs = (XSSchemaSet) f.get (model);
+      if (getVerbose ())
       getLog ().info ("schemaComponent = " + xs);
       if (xs != null)
       {
@@ -97,6 +98,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
         while (it.hasNext ())
         {
           final XSSchema a = it.next ();
+          if (getVerbose ())
           getLog ().info ("  XSSchema = " + a);
         }
       }

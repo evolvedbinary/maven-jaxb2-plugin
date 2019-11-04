@@ -1160,7 +1160,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
     this.specVersion = specVersion;
   }
 
-  protected void logConfiguration () throws MojoExecutionException
+  protected void logConfiguration ()
   {
 
     logApiConfiguration ();
@@ -1353,29 +1353,25 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
   public List <Dependency> getProjectDependencies ()
   {
 
-    @SuppressWarnings ("unchecked")
     final Set <Artifact> artifacts = getProject ().getArtifacts ();
 
     if (artifacts == null)
     {
       return Collections.emptyList ();
     }
-    else
+    final List <Dependency> dependencies = new ArrayList <> (artifacts.size ());
+    for (final Artifact artifact : artifacts)
     {
-      final List <Dependency> dependencies = new ArrayList <> (artifacts.size ());
-      for (final Artifact artifact : artifacts)
-      {
-        final Dependency dependency = new Dependency ();
-        dependency.setGroupId (artifact.getGroupId ());
-        dependency.setArtifactId (artifact.getArtifactId ());
-        dependency.setVersion (artifact.getVersion ());
-        dependency.setClassifier (artifact.getClassifier ());
-        dependency.setScope (artifact.getScope ());
-        dependency.setType (artifact.getType ());
-        dependencies.add (dependency);
-      }
-      return dependencies;
+      final Dependency dependency = new Dependency ();
+      dependency.setGroupId (artifact.getGroupId ());
+      dependency.setArtifactId (artifact.getArtifactId ());
+      dependency.setVersion (artifact.getVersion ());
+      dependency.setClassifier (artifact.getClassifier ());
+      dependency.setScope (artifact.getScope ());
+      dependency.setType (artifact.getType ());
+      dependencies.add (dependency);
     }
+    return dependencies;
   }
 
   protected List <URI> createResourceEntryUris (final ResourceEntry resourceEntry,
@@ -1387,36 +1383,34 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
     {
       return Collections.emptyList ();
     }
-    else
+
+    final List <URI> uris = new LinkedList <> ();
+    if (resourceEntry.getFileset () != null)
     {
-      final List <URI> uris = new LinkedList <> ();
-      if (resourceEntry.getFileset () != null)
-      {
-        final FileSet fileset = resourceEntry.getFileset ();
-        uris.addAll (createFileSetUris (fileset, defaultDirectory, defaultIncludes, defaultExcludes));
-      }
-      if (resourceEntry.getUrl () != null)
-      {
-        final String urlDraft = resourceEntry.getUrl ();
-        uris.add (createUri (urlDraft));
-      }
-      if (resourceEntry.getDependencyResource () != null)
-      {
-        final String systemId = resourceEntry.getDependencyResource ().getSystemId ();
-        try
-        {
-          final URI uri = new URI (systemId);
-          uris.add (uri);
-        }
-        catch (final URISyntaxException e)
-        {
-          throw new MojoExecutionException (MessageFormat.format ("Could not create the resource entry URI from the following system id: [{0}].",
-                                                                  systemId),
-                                            e);
-        }
-      }
-      return uris;
+      final FileSet fileset = resourceEntry.getFileset ();
+      uris.addAll (createFileSetUris (fileset, defaultDirectory, defaultIncludes, defaultExcludes));
     }
+    if (resourceEntry.getUrl () != null)
+    {
+      final String urlDraft = resourceEntry.getUrl ();
+      uris.add (createUri (urlDraft));
+    }
+    if (resourceEntry.getDependencyResource () != null)
+    {
+      final String systemId = resourceEntry.getDependencyResource ().getSystemId ();
+      try
+      {
+        final URI uri = new URI (systemId);
+        uris.add (uri);
+      }
+      catch (final URISyntaxException e)
+      {
+        throw new MojoExecutionException (MessageFormat.format ("Could not create the resource entry URI from the following system id: [{0}].",
+                                                                systemId),
+                                          e);
+      }
+    }
+    return uris;
   }
 
   public URL resolveDependencyResource (final DependencyResource dependencyResource) throws MojoExecutionException
@@ -1641,13 +1635,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
 
   protected void cleanPackageDirectory (final File packageDirectory)
   {
-    final File [] files = packageDirectory.listFiles (new FileFilter ()
-    {
-      public boolean accept (final File aPathname)
-      {
-        return aPathname.isFile ();
-      }
-    });
+    final File [] files = packageDirectory.listFiles ((FileFilter) aPathname -> aPathname.isFile ());
     if (files != null)
     {
       for (final File file : files)
