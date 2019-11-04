@@ -1,6 +1,16 @@
 # JAXB2 Maven Plugin #
 
-Welcome to the `org.jvnet.jaxb2.maven2:maven-jaxb2-plugin`, the most advanced and feature-full Maven plugin for XML Schema compilation.
+## This is a fork of https://github.com/highsource/maven-jaxb2-plugin
+
+Forked from 0.14.1-SNAPSHOT
+
+I created it because of https://github.com/highsource/maven-jaxb2-plugin/issues/173
+
+I kicked JAXB 2.0 and 2.1 because I don't need it
+
+## Introduction
+
+Welcome to the `com.helger.maven:maven-jaxb2-plugin`, the most advanced and feature-full Maven plugin for XML Schema compilation.
 
 This Maven plugin wraps and enhances the [JAXB](https://jaxb.java.net/) [Schema Compiler (XJC)](http://docs.oracle.com/javase/6/docs/technotes/tools/share/xjc.html) and allows
 compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Maven builds.
@@ -20,9 +30,9 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
 		<plugins>
 			...
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.14.0</version>
+				<version>0.14.1</version>
 				<executions>
 					<execution>
 						<goals>
@@ -42,11 +52,9 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
 
 If you need a specific JAXB version, you can explicitly use one of the following variants:
 
-* `org.jvnet.jaxb2.maven2:maven-jaxb20-plugin` - JAXB 2.0.
-* `org.jvnet.jaxb2.maven2:maven-jaxb21-plugin` - JAXB 2.1.
-* `org.jvnet.jaxb2.maven2:maven-jaxb22-plugin` - JAXB 2.2.
-* `org.jvnet.jaxb2.maven2:maven-jaxb23-plugin` - JAXB 2.3.
-* `org.jvnet.jaxb2.maven2:maven-jaxb2-plugin` - "most actual version", at the moment same as `org.jvnet.jaxb2.maven2:maven-jaxb23-plugin`.
+* `com.helger.maven:maven-jaxb22-plugin` - JAXB 2.2.
+* `com.helger.maven:maven-jaxb23-plugin` - JAXB 2.3.
+* `com.helger.maven:maven-jaxb2-plugin` - "most actual version", at the moment same as `com.helger.maven:maven-jaxb23-plugin`.
 
 ### Java versions
 
@@ -78,4 +86,4 @@ This project is also *not* developed by or affiliated with Oracle or Sun. Even i
 
 **This plugin is in no way _official_ JAXB2 Maven plugin by Sun or Oracle.**
 
-This is a completely indepentent development. [I](https://github.com/highsource) am *not* an Oracle employee.
+This is a completely independent development. [I](https://github.com/highsource) am *not* an Oracle employee.
