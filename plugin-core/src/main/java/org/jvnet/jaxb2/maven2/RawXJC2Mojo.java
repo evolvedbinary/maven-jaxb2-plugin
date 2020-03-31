@@ -171,14 +171,14 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     return m_grammars;
   }
 
-  private void setupSchemas () throws MojoExecutionException
+  private void _setupSchemas () throws MojoExecutionException
   {
-    this.m_schemaURIs = createSchemaURIs ();
-    this.m_resolvedSchemaURIs = resolveURIs (getSchemaURIs ());
-    this.m_grammars = createGrammars ();
+    this.m_schemaURIs = _createSchemaURIs ();
+    this.m_resolvedSchemaURIs = _resolveURIs (getSchemaURIs ());
+    this.m_grammars = _createGrammars ();
   }
 
-  private List <URI> createSchemaURIs () throws MojoExecutionException
+  private List <URI> _createSchemaURIs () throws MojoExecutionException
   {
     final List <File> schemaFiles = getSchemaFiles ();
     final List <URI> schemaURIs = new ArrayList <> (schemaFiles.size ());
@@ -201,12 +201,12 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     return schemaURIs;
   }
 
-  private List <InputSource> createGrammars () throws MojoExecutionException
+  private List <InputSource> _createGrammars () throws MojoExecutionException
   {
     try
     {
       final List <URI> schemaURIs = getSchemaURIs ();
-      return getInputSources (schemaURIs);
+      return _getInputSources (schemaURIs);
     }
     catch (final IOException ioex)
     {
@@ -258,11 +258,11 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     return bindFiles;
   }
 
-  private void setupBindings () throws MojoExecutionException
+  private void _setupBindings () throws MojoExecutionException
   {
     this.m_bindingURIs = createBindingURIs ();
-    this.resolvedBindingURIs = resolveURIs (getBindingURIs ());
-    this.bindFiles = createBindFiles ();
+    this.resolvedBindingURIs = _resolveURIs (getBindingURIs ());
+    this.bindFiles = _createBindFiles ();
   }
 
   protected List <URI> createBindingURIs () throws MojoExecutionException
@@ -314,18 +314,18 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
     if (getScanDependenciesForBindings ())
     {
-      collectBindingUrisFromDependencies (bindingUris);
+      _collectBindingUrisFromDependencies (bindingUris);
     }
 
     return bindingUris;
   }
 
-  private List <InputSource> createBindFiles () throws MojoExecutionException
+  private List <InputSource> _createBindFiles () throws MojoExecutionException
   {
     try
     {
       final List <URI> bindingURIs = getBindingURIs ();
-      return getInputSources (bindingURIs);
+      return _getInputSources (bindingURIs);
     }
     catch (final IOException ioex)
     {
@@ -415,13 +415,13 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
       if (dependencyManagement != null)
       {
-        merge (dependencyMap, dependencyManagement.getDependencies ());
+        _merge (dependencyMap, dependencyManagement.getDependencies ());
       }
-      merge (dependencyMap, getProjectDependencies ());
+      _merge (dependencyMap, getProjectDependencies ());
     }
   }
 
-  private void merge (final Map <String, Dependency> dependencyMap, final List <Dependency> managedDependencies)
+  private void _merge (final Map <String, Dependency> dependencyMap, final List <Dependency> managedDependencies)
   {
     for (final Dependency managedDependency : managedDependencies)
     {
@@ -506,7 +506,6 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
   protected ClassLoader createClassLoader (final ClassLoader parent)
   {
-
     final Collection <URL> xjcPluginURLs = getXjcPluginURLs ();
 
     return new ParentFirstClassLoader (xjcPluginURLs.toArray (new URL [xjcPluginURLs.size ()]), parent);
@@ -517,18 +516,18 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     setupLogging ();
     if (getVerbose ())
       getLog ().info ("Started execution.");
-    setupBindInfoPackage ();
-    setupEpisodePackage ();
+    _setupBindInfoPackage ();
+    _setupEpisodePackage ();
     setupMavenPaths ();
-    setupCatalogResolver ();
-    setupEntityResolver ();
+    _setupCatalogResolver ();
+    _setupEntityResolver ();
     setupSchemaFiles ();
     setupBindingFiles ();
-    setupSchemas ();
-    setupBindings ();
+    _setupSchemas ();
+    _setupBindings ();
     setupDependsURIs ();
-    setupProducesURIs ();
-    setupURILastModifiedResolver ();
+    _setupProducesURIs ();
+    _setupURILastModifiedResolver ();
     if (getVerbose ())
     {
       logConfiguration ();
@@ -541,7 +540,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       getLog ().info ("optionsConfiguration:" + optionsConfiguration);
     }
 
-    checkCatalogsInStrictMode ();
+    _checkCatalogsInStrictMode ();
 
     if (getGrammars ().isEmpty ())
     {
@@ -578,7 +577,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
       setupDirectories ();
       doExecute (options);
-      addIfExistsToEpisodeSchemaBindings ();
+      _addIfExistsToEpisodeSchemaBindings ();
       final BuildContext buildContext = getBuildContext ();
       getLog ().debug (MessageFormat.format ("Refreshing the generated directory [{0}].",
                                              getGenerateDirectory ().getAbsolutePath ()));
@@ -591,7 +590,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     }
   }
 
-  private void setupBindInfoPackage ()
+  private void _setupBindInfoPackage ()
   {
     final String packageInfoClassName = "com.sun.tools.xjc.reader.xmlschema.bindinfo.package-info";
     try
@@ -626,7 +625,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
   }
 
-  private void setupEpisodePackage ()
+  private void _setupEpisodePackage ()
   {
     final String packageInfoClassName = "com.sun.xml.bind.v2.schemagen.episode.package-info";
     try
@@ -661,7 +660,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
   }
 
-  private void addIfExistsToEpisodeSchemaBindings () throws MojoExecutionException
+  private void _addIfExistsToEpisodeSchemaBindings () throws MojoExecutionException
   {
     if (!getEpisode () || !isAddIfExistsToEpisodeSchemaBindings ())
     {
@@ -703,7 +702,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
 
   private URILastModifiedResolver uriLastModifiedResolver;
 
-  private void setupURILastModifiedResolver ()
+  private void _setupURILastModifiedResolver ()
   {
     this.uriLastModifiedResolver = new CompositeURILastModifiedResolver (getLog ());
   }
@@ -717,7 +716,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     return uriLastModifiedResolver;
   }
 
-  private void checkCatalogsInStrictMode ()
+  private void _checkCatalogsInStrictMode ()
   {
     if (getStrict () && !getCatalogURIs ().isEmpty ())
     {
@@ -842,12 +841,12 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
             getLog ().info ("disableDefaultExcludes = " + getDisableDefaultExcludes ());
             getLog ().info ("BuildContext= " + getBuildContext ());
           }
-          this.m_schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
-                                                              schemaDirectory,
-                                                              getSchemaIncludes (),
-                                                              getSchemaExcludes (),
-                                                              !getDisableDefaultExcludes (),
-                                                              getLog ());
+          m_schemaFiles = IOUtils.scanDirectoryForFiles (getBuildContext (),
+                                                         schemaDirectory,
+                                                         getSchemaIncludes (),
+                                                         getSchemaExcludes (),
+                                                         !getDisableDefaultExcludes (),
+                                                         getVerbose () ? getLog () : null);
 
           if (getVerbose ())
             getLog ().info ("schemaFiles (calced) = " + this.m_schemaFiles);
@@ -855,8 +854,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
         else
         {
           this.m_schemaFiles = Collections.emptyList ();
-          getLog ().warn (MessageFormat.format ("Schema directory [{0}] is not a directory.",
-                                                schemaDirectory.getPath ()));
+          getLog ().warn ("Schema directory [" + schemaDirectory.getPath () + "] is not a directory.");
         }
     }
     catch (final IOException ioex)
@@ -887,8 +885,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
         else
         {
           this.m_bindingFiles = Collections.emptyList ();
-          getLog ().warn (MessageFormat.format ("Binding directory [{0}] is not a directory.",
-                                                bindingDirectory.getPath ()));
+          getLog ().warn ("Binding directory [" + bindingDirectory.getPath () + "] is not a directory.");
         }
     }
     catch (final IOException ioex)
@@ -944,7 +941,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     this.m_dependsURIs = dependsURIs;
   }
 
-  private void setupProducesURIs () throws MojoExecutionException
+  private void _setupProducesURIs () throws MojoExecutionException
   {
     this.m_producesURIs = createProducesURIs ();
   }
@@ -961,15 +958,9 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                                        !getDisableDefaultExcludes (),
                                                                        null);
       if (producesFiles != null)
-      {
         for (final File producesFile : producesFiles)
-        {
           if (producesFile != null)
-          {
             producesURIs.add (producesFile.toURI ());
-          }
-        }
-      }
       return producesURIs;
     }
     catch (final IOException ioex)
@@ -1005,22 +996,18 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     }
   }
 
-  private void collectBindingUrisFromDependencies (final List <URI> bindingUris) throws MojoExecutionException
+  private void _collectBindingUrisFromDependencies (final List <URI> bindingUris) throws MojoExecutionException
   {
     final Collection <Artifact> projectArtifacts = getProject ().getArtifacts ();
     final List <Artifact> compileScopeArtifacts = new ArrayList <> (projectArtifacts.size ());
     final ArtifactFilter filter = new ScopeArtifactFilter (Artifact.SCOPE_COMPILE);
     for (final Artifact artifact : projectArtifacts)
-    {
       if (filter.include (artifact))
-      {
         compileScopeArtifacts.add (artifact);
-      }
-    }
 
     for (final Artifact artifact : compileScopeArtifacts)
     {
-      getLog ().debug (MessageFormat.format ("Scanning artifact [{0}] for JAXB binding files.", artifact));
+      getLog ().debug ("Scanning artifact [" + artifact + "] for JAXB binding files.");
       collectBindingUrisFromArtifact (artifact.getFile (), bindingUris);
     }
   }
@@ -1041,8 +1028,9 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
           }
           catch (final URISyntaxException urisex)
           {
-            throw new MojoExecutionException (MessageFormat.format ("Could not create the URI of the binding file from [{0}]",
-                                                                    entry.getName ()),
+            throw new MojoExecutionException ("Could not create the URI of the binding file from [" +
+                                              entry.getName () +
+                                              "]",
                                               urisex);
           }
         }
@@ -1059,61 +1047,53 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
   private List <URI> m_catalogURIs;
   private List <URI> m_resolvedCatalogURIs;
 
-  protected List <URI> getCatalogURIs ()
+  protected final List <URI> getCatalogURIs ()
   {
     if (m_catalogURIs == null)
-    {
       throw new IllegalStateException ("Catalog URIs were not set up yet.");
-    }
     return m_catalogURIs;
   }
 
-  protected List <URI> getResolvedCatalogURIs ()
+  protected final List <URI> getResolvedCatalogURIs ()
   {
     if (m_resolvedCatalogURIs == null)
-    {
       throw new IllegalStateException ("Resolved catalog URIs were not set up yet.");
-    }
     return m_resolvedCatalogURIs;
   }
 
-  protected CatalogResolver getCatalogResolverInstance ()
+  protected final CatalogResolver getCatalogResolverInstance ()
   {
     if (m_catalogResolverInstance == null)
-    {
       throw new IllegalStateException ("Catalog resolver was not set up yet.");
-    }
     return m_catalogResolverInstance;
   }
 
-  private void setupCatalogResolver () throws MojoExecutionException
+  private void _setupCatalogResolver () throws MojoExecutionException
   {
     this.m_catalogResolverInstance = createCatalogResolver ();
     this.m_catalogURIs = createCatalogURIs ();
-    this.m_resolvedCatalogURIs = resolveURIs (getCatalogURIs ());
-    parseResolvedCatalogURIs ();
+    this.m_resolvedCatalogURIs = _resolveURIs (getCatalogURIs ());
+    _parseResolvedCatalogURIs ();
 
   }
 
   private EntityResolver m_entityResolver;
 
-  protected EntityResolver getEntityResolver ()
+  protected final EntityResolver getEntityResolver ()
   {
     if (m_entityResolver == null)
-    {
       throw new IllegalStateException ("Entity resolver was not set up yet.");
-    }
     return m_entityResolver;
   }
 
-  private void setupEntityResolver ()
+  private final void _setupEntityResolver ()
   {
     this.m_entityResolver = createEntityResolver (getCatalogResolverInstance ());
     if (getVerbose ())
       getLog ().info ("EntityResolver set to " + this.m_entityResolver);
   }
 
-  protected EntityResolver createEntityResolver (final CatalogResolver catalogResolver)
+  protected final EntityResolver createEntityResolver (final CatalogResolver catalogResolver)
   {
     if (getVerbose ())
       getLog ().info ("EntityResolver using catalogResolver " + this.m_catalogResolver);
@@ -1128,14 +1108,14 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
    * @throws MojoExecutionException
    *         If catalog resolver cannot be instantiated.
    */
-  protected CatalogResolver createCatalogResolver () throws MojoExecutionException
+  protected final CatalogResolver createCatalogResolver () throws MojoExecutionException
   {
     final CatalogManager catalogManager = new CatalogManager ();
     catalogManager.setIgnoreMissingProperties (true);
     catalogManager.setUseStaticCatalog (false);
-    // TODO Logging
-    // if (getLog ().isDebugEnabled ())
+    if (getLog ().isDebugEnabled ())
     {
+      // This enables maximum verbosity on the Catalogue resolver
       catalogManager.setVerbosity (Integer.MAX_VALUE);
     }
     if (getCatalogResolver () == null)
@@ -1148,10 +1128,10 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     final String catalogResolverClassName = getCatalogResolver ().trim ();
     if (getVerbose ())
       getLog ().info ("Using catalogResolverClassName '" + catalogResolverClassName + "'");
-    return createCatalogResolverByClassName (catalogResolverClassName);
+    return _createCatalogResolverByClassName (catalogResolverClassName);
   }
 
-  private CatalogResolver createCatalogResolverByClassName (final String catalogResolverClassName) throws MojoExecutionException
+  private CatalogResolver _createCatalogResolverByClassName (final String catalogResolverClassName) throws MojoExecutionException
   {
     try
     {
@@ -1160,32 +1140,28 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
                                                         .loadClass (catalogResolverClassName);
       if (!CatalogResolver.class.isAssignableFrom (draftCatalogResolverClass))
       {
-        throw new MojoExecutionException (MessageFormat.format ("Specified catalog resolver class [{0}] could not be casted to [{1}].",
-                                                                m_catalogResolver,
-                                                                CatalogResolver.class));
+        throw new MojoExecutionException ("Specified catalog resolver class [" +
+                                          m_catalogResolver +
+                                          "] could not be casted to " +
+                                          CatalogResolver.class.getName () +
+                                          "].");
       }
-
-      @SuppressWarnings ("unchecked")
-      final Class <? extends CatalogResolver> catalogResolverClass = (Class <? extends CatalogResolver>) draftCatalogResolverClass;
-      final CatalogResolver _catalogResolverInstance = catalogResolverClass.newInstance ();
+      final CatalogResolver _catalogResolverInstance = (CatalogResolver) draftCatalogResolverClass.newInstance ();
       return _catalogResolverInstance;
     }
     catch (final ClassNotFoundException cnfex)
     {
-      throw new MojoExecutionException (MessageFormat.format ("Could not find specified catalog resolver class [{0}].",
-                                                              m_catalogResolver),
+      throw new MojoExecutionException ("Could not find specified catalog resolver class [" + m_catalogResolver + "].",
                                         cnfex);
     }
     catch (final InstantiationException iex)
     {
-      throw new MojoExecutionException (MessageFormat.format ("Could not instantiate catalog resolver class [{0}].",
-                                                              m_catalogResolver),
+      throw new MojoExecutionException ("Could not instantiate catalog resolver class [" + m_catalogResolver + "].",
                                         iex);
     }
     catch (final IllegalAccessException iaex)
     {
-      throw new MojoExecutionException (MessageFormat.format ("Could not instantiate catalog resolver class [{0}].",
-                                                              m_catalogResolver),
+      throw new MojoExecutionException ("Could not instantiate catalog resolver class [" + m_catalogResolver + "].",
                                         iaex);
     }
   }
@@ -1215,8 +1191,9 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
           {
             if (getVerbose ())
             {
-              getLog ().debug (MessageFormat.format ("File [{0}] might have been changed since the last build.",
-                                                     dependsFile.getAbsolutePath ()));
+              getLog ().debug ("File [" +
+                               dependsFile.getAbsolutePath () +
+                               "] might have been changed since the last build.");
             }
             // It is known that something was changed.
             itIsKnownThatNoDependsURIsWereChanged = false;
@@ -1276,7 +1253,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     final int proxyPort = getProxyPort ();
     final String proxyUsername = getProxyUsername ();
     final String proxyPassword = getProxyPassword ();
-    return proxyHost != null ? createXJCProxyArgument (proxyHost, proxyPort, proxyUsername, proxyPassword) : null;
+    return proxyHost != null ? _createXJCProxyArgument (proxyHost, proxyPort, proxyUsername, proxyPassword) : null;
   }
 
   protected String getActiveProxyAsHttpproxy ()
@@ -1294,16 +1271,16 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       return null;
     }
 
-    return createXJCProxyArgument (activeProxy.getHost (),
-                                   activeProxy.getPort (),
-                                   activeProxy.getUsername (),
-                                   activeProxy.getPassword ());
+    return _createXJCProxyArgument (activeProxy.getHost (),
+                                    activeProxy.getPort (),
+                                    activeProxy.getUsername (),
+                                    activeProxy.getPassword ());
   }
 
-  private String createXJCProxyArgument (final String host,
-                                         final int port,
-                                         final String username,
-                                         final String password)
+  private String _createXJCProxyArgument (final String host,
+                                          final int port,
+                                          final String username,
+                                          final String password)
   {
 
     if (host == null)
@@ -1484,7 +1461,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     return optionsConfiguration;
   }
 
-  private List <URI> resolveURIs (final List <URI> uris)
+  private List <URI> _resolveURIs (final List <URI> uris)
   {
     final List <URI> resolvedURIs = new ArrayList <> (uris.size ());
     for (URI uri : uris)
@@ -1497,16 +1474,14 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
           uri = new URI (URI);
         }
         catch (final URISyntaxException ignored)
-        {
-
-        }
+        {}
       }
       resolvedURIs.add (uri);
     }
     return resolvedURIs;
   }
 
-  private void parseResolvedCatalogURIs () throws MojoExecutionException
+  private void _parseResolvedCatalogURIs () throws MojoExecutionException
   {
     for (final URI catalogURI : getResolvedCatalogURIs ())
     {
@@ -1530,7 +1505,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
     }
   }
 
-  private List <InputSource> getInputSources (final List <URI> uris) throws IOException, SAXException
+  private List <InputSource> _getInputSources (final List <URI> uris) throws IOException, SAXException
   {
     if (getVerbose ())
       getLog ().info ("getInputSources total: " + uris);

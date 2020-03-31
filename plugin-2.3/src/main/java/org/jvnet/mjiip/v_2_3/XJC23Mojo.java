@@ -31,7 +31,10 @@ import com.sun.xml.xsom.XSSchemaSet;
  *
  * @author Aleksei Valikov (valikov@gmx.net)
  */
-@Mojo (name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.COMPILE, threadSafe = true)
+@Mojo (name = "generate",
+       defaultPhase = LifecyclePhase.GENERATE_SOURCES,
+       requiresDependencyResolution = ResolutionScope.COMPILE,
+       threadSafe = true)
 public class XJC23Mojo extends RawXJC2Mojo <Options>
 {
 
@@ -78,6 +81,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     {
       // Fake check
       final InputSource [] schemas = options.getGrammars ();
+      getLog ().info ("Starting SchemaConstraintChecker");
       if (!SchemaConstraintChecker.check (schemas, er, getEntityResolver (), false))
         getLog ().error ("SchemaConstraintChecker failed");
     }
@@ -91,7 +95,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
       final Field f = model.getClass ().getDeclaredField ("schemaComponent");
       final XSSchemaSet xs = (XSSchemaSet) f.get (model);
       if (getVerbose ())
-      getLog ().info ("schemaComponent = " + xs);
+        getLog ().info ("schemaComponent = " + xs);
       if (xs != null)
       {
         final Iterator <XSSchema> it = xs.iterateSchema ();
@@ -99,7 +103,7 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
         {
           final XSSchema a = it.next ();
           if (getVerbose ())
-          getLog ().info ("  XSSchema = " + a);
+            getLog ().info ("  XSSchema = " + a);
         }
       }
     }

@@ -133,7 +133,7 @@ public class IOUtils
     return reorderFiles (files, includes, aLogger);
   }
 
-  private static boolean isWildcard (final String s)
+  private static boolean _isWildcard (final String s)
   {
     return s.indexOf ('*') >= 0 || s.indexOf ('?') >= 0;
   }
@@ -154,6 +154,8 @@ public class IOUtils
    * @param includes
    *        The source includes in the correct order. May be <code>null</code>
    *        or empty.
+   * @param aLogger
+   *        Loggert to use. Never <code>null</code>.
    * @return The ordered list of files, that tries to take the source order as
    *         good as possible
    */
@@ -169,7 +171,7 @@ public class IOUtils
     for (final String inc : includes)
     {
       // Only deal with fixed files
-      if (!isWildcard (inc))
+      if (!_isWildcard (inc))
       {
         // Ensure to use the system path separator
         final String sUnifiedInclude = inc.replace ('\\', File.separatorChar).replace ('/', File.separatorChar);

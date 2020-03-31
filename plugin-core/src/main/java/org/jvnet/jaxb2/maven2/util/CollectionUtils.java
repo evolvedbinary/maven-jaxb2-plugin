@@ -10,39 +10,31 @@ import java.util.function.Function;
 public class CollectionUtils
 {
 
-  public static class PositiveComparatorWithNullAsGreatest <V extends Object & Comparable <? super V>> implements
-                                                           Comparator <V>
+  public static class PositiveComparatorWithNullAsGreatest <V extends Comparable <? super V>> implements Comparator <V>
   {
     public int compare (final V o1, final V o2)
     {
       if (o1 == null && o2 == null)
         return 0;
-      else
-        if (o1 == null)
-          return 1;
-        else
-          if (o2 == null)
-            return -1;
-          else
-            return o1.compareTo (o2);
+      if (o1 == null)
+        return 1;
+      if (o2 == null)
+        return -1;
+      return o1.compareTo (o2);
     }
   }
 
-  public static class NegativeComparatorWithNullAsSmallest <V extends Object & Comparable <? super V>> implements
-                                                           Comparator <V>
+  public static class NegativeComparatorWithNullAsSmallest <V extends Comparable <? super V>> implements Comparator <V>
   {
     public int compare (final V o1, final V o2)
     {
       if (o1 == null && o2 == null)
         return 0;
-      else
-        if (o1 == null)
-          return 1;
-        else
-          if (o2 == null)
-            return -1;
-          else
-            return -o1.compareTo (o2);
+      if (o1 == null)
+        return 1;
+      if (o2 == null)
+        return -1;
+      return -o1.compareTo (o2);
     }
   }
 
@@ -76,24 +68,21 @@ public class CollectionUtils
     return candidateValue;
   }
 
-  @SuppressWarnings ("rawtypes")
-  private static Comparator <?> LT_NULL_SMALLEST = new NegativeComparatorWithNullAsSmallest ();
+  private static Comparator <?> LT_NULL_SMALLEST = new NegativeComparatorWithNullAsSmallest <> ();
 
-  @SuppressWarnings ("rawtypes")
-  private static Comparator <?> GT_NULL_GREATEST = new PositiveComparatorWithNullAsGreatest ();
+  private static Comparator <?> GT_NULL_GREATEST = new PositiveComparatorWithNullAsGreatest <> ();
 
-  public static <V extends Object & Comparable <? super V>> Comparator <V> ltWithNullAsSmallest ()
+  public static <V extends Comparable <? super V>> Comparator <V> ltWithNullAsSmallest ()
   {
     @SuppressWarnings ("unchecked")
     final Comparator <V> comparator = (Comparator <V>) LT_NULL_SMALLEST;
     return comparator;
   }
 
-  public static <V extends Object & Comparable <? super V>> Comparator <V> gtWithNullAsGreatest ()
+  public static <V extends Comparable <? super V>> Comparator <V> gtWithNullAsGreatest ()
   {
     @SuppressWarnings ("unchecked")
     final Comparator <V> comparator = (Comparator <V>) GT_NULL_GREATEST;
     return comparator;
   }
-
 }

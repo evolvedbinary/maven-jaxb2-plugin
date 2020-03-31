@@ -5,7 +5,6 @@ import java.util.List;
 
 public class StringUtils
 {
-
   /**
    * Checks if a (trimmed) String is <code>null</code> or empty.
    *
@@ -16,7 +15,7 @@ public class StringUtils
    */
   public static boolean isEmpty (final String string)
   {
-    return (string == null || string.trim ().length () == 0);
+    return string == null || string.trim ().length () == 0;
   }
 
   public static String escapeSpace (final String url)
