@@ -128,7 +128,7 @@ public class OptionsFactory implements org.jvnet.jaxb2.maven2.IOptionsFactory <O
 
   private Language createLanguage (final String schemaLanguage) throws MojoExecutionException
   {
-    if (StringUtils.isEmpty (schemaLanguage))
+    if (StringUtils.isEmptyTrimmed (schemaLanguage))
       return null;
     if ("AUTODETECT".equalsIgnoreCase (schemaLanguage))
     {

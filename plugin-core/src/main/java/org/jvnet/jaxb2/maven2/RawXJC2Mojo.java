@@ -1508,7 +1508,7 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
   private List <InputSource> _getInputSources (final List <URI> uris) throws IOException, SAXException
   {
     if (getVerbose ())
-      getLog ().info ("getInputSources total: " + uris);
+      getLog ().info ("getInputSources total [" + uris.size () + ": [" + uris + "]");
     final List <InputSource> inputSources = new ArrayList <> (uris.size ());
     for (final URI uri : uris)
     {

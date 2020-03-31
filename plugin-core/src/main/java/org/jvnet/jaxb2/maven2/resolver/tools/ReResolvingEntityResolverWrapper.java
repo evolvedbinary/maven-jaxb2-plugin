@@ -6,6 +6,8 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.helger.commons.string.ToStringGenerator;
+
 public class ReResolvingEntityResolverWrapper implements EntityResolver
 {
 
@@ -39,5 +41,11 @@ public class ReResolvingEntityResolverWrapper implements EntityResolver
     final String pId = publicId != null ? publicId : resolvedInputSource.getPublicId ();
     final String sId = systemId != null ? systemId : resolvedInputSource.getSystemId ();
     return new ReResolvingInputSourceWrapper (this.entityResolver, resolvedInputSource, pId, sId);
+  }
+
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("entityResolver", entityResolver).getToString ();
   }
 }

@@ -1,16 +1,24 @@
 package org.jvnet.jaxb2.maven2;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Dependency;
 import org.jvnet.jaxb2.maven2.resolver.tools.MavenCatalogResolver;
-import org.jvnet.jaxb2.maven2.util.StringUtils;
 
-public class DependencyResource extends Dependency
+import com.helger.commons.string.StringHelper;
+
+public final class DependencyResource extends Dependency
 {
   private static final long serialVersionUID = -7680130645800522100L;
   private String resource;
+  private String systemId;
+
+  public DependencyResource ()
+  {
+    setScope (Artifact.SCOPE_RUNTIME);
+  }
 
   public String getResource ()
   {
@@ -22,9 +30,27 @@ public class DependencyResource extends Dependency
     this.resource = resource;
   }
 
-  public DependencyResource ()
+  public void setSystemId (final String systemId)
   {
-    setScope (Artifact.SCOPE_RUNTIME);
+    this.systemId = systemId;
+  }
+
+  public String getSystemId ()
+  {
+    if (this.systemId != null)
+      return this.systemId;
+
+    // maven:groupId:artifactId:type:classifier:version!/resource/path/in/jar/schema.xsd
+    final StringBuilder sb = new StringBuilder ();
+    sb.append (MavenCatalogResolver.URI_SCHEME_MAVEN).append (':');
+    sb.append (getGroupId ()).append (':');
+    sb.append (getArtifactId ()).append (':');
+    sb.append (getType () == null ? "" : getType ()).append (':');
+    sb.append (getClassifier () == null ? "" : getClassifier ()).append (':');
+    sb.append (StringHelper.getNotNull (getVersion ()));
+    sb.append ("!/");
+    sb.append (getResource ());
+    return sb.toString ();
   }
 
   @Override
@@ -43,32 +69,6 @@ public class DependencyResource extends Dependency
            ", resource=" +
            getResource () +
            "}";
-  }
-
-  private String systemId;
-
-  public void setSystemId (final String systemId)
-  {
-    this.systemId = systemId;
-  }
-
-  public String getSystemId ()
-  {
-    if (this.systemId != null)
-    {
-      return this.systemId;
-    }
-    // maven:groupId:artifactId:type:classifier:version!/resource/path/in/jar/schema.xsd
-    final StringBuilder sb = new StringBuilder ();
-    sb.append (MavenCatalogResolver.URI_SCHEME_MAVEN).append (':');
-    sb.append (getGroupId ()).append (':');
-    sb.append (getArtifactId ()).append (':');
-    sb.append (getType () == null ? "" : getType ()).append (':');
-    sb.append (getClassifier () == null ? "" : getClassifier ()).append (':');
-    sb.append (getVersion () == null ? "" : getVersion ());
-    sb.append ("!/");
-    sb.append (getResource ());
-    return sb.toString ();
   }
 
   public static DependencyResource valueOf (final String value) throws IllegalArgumentException
@@ -90,75 +90,52 @@ public class DependencyResource extends Dependency
       resource = value.substring (resourceDelimiterPosition + resourceDelimiter.length ());
     }
 
-    final String [] dependencyParts = StringUtils.split (dependencyPart, ':', true);
+    final List <String> dependencyParts = StringHelper.getExploded (':', dependencyPart);
 
-    if (dependencyParts.length < 2)
+    if (dependencyParts.size () < 2)
     {
       throw new IllegalArgumentException (MessageFormat.format ("Error parsing dependency descriptor [{0}], both groupId and artifactId must be specified.",
                                                                 dependencyPart));
     }
 
-    if (dependencyParts.length > 5)
+    if (dependencyParts.size () > 5)
     {
       throw new IllegalArgumentException (MessageFormat.format ("Error parsing dependency descriptor [{0}], it contains too many parts.",
                                                                 dependencyPart));
     }
 
-    final String groupId = dependencyParts[0];
-    final String artifactId = dependencyParts[1];
-    final String version;
+    final String groupId = dependencyParts.get (0);
+    final String artifactId = dependencyParts.get (1);
 
     final String type;
-
-    if (dependencyParts.length > 2)
-    {
-      type = (dependencyParts[2] == null || dependencyParts[2].length () == 0) ? null : dependencyParts[2];
-    }
+    if (dependencyParts.size () > 2)
+      type = StringHelper.getNotEmpty (dependencyParts.get (2), null);
     else
-    {
       type = null;
-    }
 
     final String classifier;
-
-    if (dependencyParts.length > 3)
-    {
-      classifier = (dependencyParts[3] == null || dependencyParts[3].length () == 0) ? null : dependencyParts[3];
-    }
+    if (dependencyParts.size () > 3)
+      classifier = StringHelper.getNotEmpty (dependencyParts.get (3), null);
     else
-    {
       classifier = null;
-    }
 
-    if (dependencyParts.length > 4)
-    {
-      version = (dependencyParts[4] == null || dependencyParts[4].length () == 0) ? null : dependencyParts[4];
-    }
+    final String version;
+    if (dependencyParts.size () > 4)
+      version = StringHelper.getNotEmpty (dependencyParts.get (4), null);
     else
-    {
       version = null;
-    }
 
     final DependencyResource dependencyResource = new DependencyResource ();
-
     dependencyResource.setGroupId (groupId);
     dependencyResource.setArtifactId (artifactId);
     if (version != null)
-    {
       dependencyResource.setVersion (version);
-    }
     if (type != null)
-    {
       dependencyResource.setType (type);
-    }
     if (classifier != null)
-    {
       dependencyResource.setClassifier (classifier);
-    }
     if (resource != null)
-    {
       dependencyResource.setResource (resource);
-    }
     dependencyResource.setSystemId (value);
     return dependencyResource;
   }

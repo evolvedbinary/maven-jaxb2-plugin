@@ -104,39 +104,30 @@ public class OptionsFactory implements org.jvnet.jaxb2.maven2.IOptionsFactory <O
     try
     {
       if (!Charset.isSupported (encoding))
-      {
         throw new MojoExecutionException (MessageFormat.format ("Unsupported encoding [{0}].", encoding));
-      }
       return encoding;
     }
     catch (final IllegalCharsetNameException icne)
     {
       throw new MojoExecutionException (MessageFormat.format ("Unsupported encoding [{0}].", encoding));
     }
-
   }
 
   private Language createLanguage (final String schemaLanguage) throws MojoExecutionException
   {
-    if (StringUtils.isEmpty (schemaLanguage))
+    if (StringUtils.isEmptyTrimmed (schemaLanguage))
+      return null;
+    if ("AUTODETECT".equalsIgnoreCase (schemaLanguage))
     {
+      // nothing, it is AUTDETECT by default.
       return null;
     }
-    else
-      if ("AUTODETECT".equalsIgnoreCase (schemaLanguage))
-        return null; // nothing, it is AUTDETECT by default.
-      else
-        if ("XMLSCHEMA".equalsIgnoreCase (schemaLanguage))
-          return Language.XMLSCHEMA;
-        else
-          if ("DTD".equalsIgnoreCase (schemaLanguage))
-            return Language.DTD;
-          else
-            if ("WSDL".equalsIgnoreCase (schemaLanguage))
-              return Language.WSDL;
-            else
-            {
-              throw new MojoExecutionException ("Unknown schemaLanguage [" + schemaLanguage + "].");
-            }
+    if ("XMLSCHEMA".equalsIgnoreCase (schemaLanguage))
+      return Language.XMLSCHEMA;
+    if ("DTD".equalsIgnoreCase (schemaLanguage))
+      return Language.DTD;
+    if ("WSDL".equalsIgnoreCase (schemaLanguage))
+      return Language.WSDL;
+    throw new MojoExecutionException ("Unknown schemaLanguage [" + schemaLanguage + "].");
   }
 }

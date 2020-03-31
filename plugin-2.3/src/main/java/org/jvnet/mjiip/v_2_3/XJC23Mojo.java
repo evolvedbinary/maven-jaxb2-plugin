@@ -59,9 +59,10 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
   {
     if (getVerbose ())
     {
-      getLog ().info ("Parsing input schema(s)...");
-      getLog ().info ("Input schemas: " + Arrays.toString (options.getGrammars ()));
-      for (final InputSource x : options.getGrammars ())
+      final InputSource [] aGrammars = options.getGrammars ();
+      getLog ().info ("Parsing " + aGrammars.length + " input schema(s)...");
+      getLog ().info ("Input schemas: " + Arrays.toString (aGrammars));
+      for (final InputSource x : aGrammars)
       {
         getLog ().info ("  Next InputSource");
         if (x.getPublicId () != null)

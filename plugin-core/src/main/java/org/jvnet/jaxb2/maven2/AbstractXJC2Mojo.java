@@ -1390,12 +1390,12 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     if (resourceEntry.getFileset () != null)
     {
       final FileSet fileset = resourceEntry.getFileset ();
-      uris.addAll (createFileSetUris (fileset, defaultDirectory, defaultIncludes, defaultExcludes));
+      uris.addAll (_createFileSetUris (fileset, defaultDirectory, defaultIncludes, defaultExcludes));
     }
     if (resourceEntry.getUrl () != null)
     {
       final String urlDraft = resourceEntry.getUrl ();
-      uris.add (createUri (urlDraft));
+      uris.add (_createUri (urlDraft));
     }
     if (resourceEntry.getDependencyResource () != null)
     {
@@ -1417,7 +1417,6 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
 
   public URL resolveDependencyResource (final DependencyResource dependencyResource) throws MojoExecutionException
   {
-
     if (dependencyResource.getGroupId () == null)
     {
       throw new MojoExecutionException (MessageFormat.format ("Dependency resource [{0}] does define the groupId.",
@@ -1439,13 +1438,13 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     if (getProject ().getDependencyManagement () != null)
     {
       final List <Dependency> dependencies = getProject ().getDependencyManagement ().getDependencies ();
-      merge (dependencyResource, dependencies);
+      _merge (dependencyResource, dependencies);
     }
 
     final List <Dependency> dependencies = getProjectDependencies ();
     if (dependencies != null)
     {
-      merge (dependencyResource, dependencies);
+      _merge (dependencyResource, dependencies);
     }
 
     if (dependencyResource.getVersion () == null)
@@ -1457,18 +1456,21 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     try
     {
       final Set <Artifact> artifacts = MavenMetadataSource.createArtifacts (getArtifactFactory (),
-                                                                            Arrays.<Dependency> asList (dependencyResource),
+                                                                            Arrays.asList (dependencyResource),
                                                                             Artifact.SCOPE_RUNTIME,
                                                                             null,
                                                                             getProject ());
 
       if (artifacts.size () != 1)
       {
-        getLog ().error (MessageFormat.format ("Resolved dependency resource [{0}] to artifacts [{1}].",
-                                               dependencyResource,
-                                               artifacts));
-        throw new MojoExecutionException (MessageFormat.format ("Could not create artifact for dependency [{0}].",
-                                                                dependencyResource));
+        getLog ().error ("Resolved dependency resource [" +
+                         dependencyResource +
+                         "] to " +
+                         artifacts.size () +
+                         " artifacts [" +
+                         artifacts +
+                         "].");
+        throw new MojoExecutionException ("Could not create artifact for dependency [" + dependencyResource + "].");
       }
 
       final Artifact artifact = artifacts.iterator ().next ();
@@ -1478,13 +1480,16 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
       final String resource = dependencyResource.getResource ();
       if (resource == null)
       {
-        throw new MojoExecutionException (MessageFormat.format ("Dependency resource [{0}] does not define the resource.",
-                                                                dependencyResource));
+        throw new MojoExecutionException ("Dependency resource [" +
+                                          dependencyResource +
+                                          "] does not define the resource.");
       }
-      final URL resourceURL = createArtifactResourceUrl (artifact, resource);
-      getLog ().debug (MessageFormat.format ("Resolved dependency resource [{0}] to resource URL [{1}].",
-                                             dependencyResource,
-                                             resourceURL));
+      final URL resourceURL = _createArtifactResourceUrl (artifact, resource);
+      getLog ().debug ("Resolved dependency resource [" +
+                       dependencyResource +
+                       "] to resource URL [" +
+                       resourceURL +
+                       "].");
       return resourceURL;
     }
     catch (final ArtifactNotFoundException anfex)
@@ -1505,7 +1510,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     }
   }
 
-  private URL createArtifactResourceUrl (final Artifact artifact, final String resource) throws MojoExecutionException
+  private URL _createArtifactResourceUrl (final Artifact artifact, final String resource) throws MojoExecutionException
   {
     final File artifactFile = artifact.getFile ();
 
@@ -1536,7 +1541,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     }
   }
 
-  private URI createUri (final String uriString) throws MojoExecutionException
+  private URI _createUri (final String uriString) throws MojoExecutionException
   {
     try
     {
@@ -1550,10 +1555,10 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     }
   }
 
-  private List <URI> createFileSetUris (final FileSet fileset,
-                                        final String defaultDirectory,
-                                        final String [] defaultIncludes,
-                                        final String defaultExcludes[]) throws MojoExecutionException
+  private List <URI> _createFileSetUris (final FileSet fileset,
+                                         final String defaultDirectory,
+                                         final String [] defaultIncludes,
+                                         final String defaultExcludes[]) throws MojoExecutionException
   {
     final String draftDirectory = fileset.getDirectory ();
     final String directory = draftDirectory == null ? defaultDirectory : draftDirectory;
@@ -1614,7 +1619,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDepe
     }
   }
 
-  private void merge (final Dependency dependency, final List <Dependency> managedDependencies)
+  private void _merge (final Dependency dependency, final List <Dependency> managedDependencies)
   {
 
     for (final Dependency managedDependency : managedDependencies)

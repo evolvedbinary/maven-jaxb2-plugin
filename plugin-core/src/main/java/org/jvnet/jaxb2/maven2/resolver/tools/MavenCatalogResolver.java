@@ -3,19 +3,19 @@ package org.jvnet.jaxb2.maven2.resolver.tools;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.MessageFormat;
 
 import org.apache.maven.plugin.logging.Log;
 import org.jvnet.jaxb2.maven2.DependencyResource;
 import org.jvnet.jaxb2.maven2.IDependencyResourceResolver;
 import org.jvnet.jaxb2.maven2.plugin.logging.NullLog;
 
+import com.helger.commons.string.ToStringGenerator;
 import com.sun.org.apache.xml.internal.resolver.CatalogManager;
 
 public class MavenCatalogResolver extends com.sun.org.apache.xml.internal.resolver.tools.CatalogResolver
 {
-
   public static final String URI_SCHEME_MAVEN = "maven";
+
   private final IDependencyResourceResolver dependencyResourceResolver;
   private final CatalogManager catalogManager;
   private final Log log;
@@ -51,18 +51,21 @@ public class MavenCatalogResolver extends com.sun.org.apache.xml.internal.resolv
   }
 
   @Override
-  public String getResolvedEntity (final String publicId, String systemId)
+  public String getResolvedEntity (final String publicId, final String origSystemId)
   {
-    getLog ().debug (MessageFormat.format ("Resolving publicId [{0}], systemId [{1}].", publicId, systemId));
+    String systemId = origSystemId;
+    getLog ().debug ("Resolving publicId [" + publicId + "], systemId [" + systemId + "].");
+
     final String superResolvedEntity = super.getResolvedEntity (publicId, systemId);
-    getLog ().debug (MessageFormat.format ("Parent resolver has resolved publicId [{0}], systemId [{1}] to [{2}].",
-                                           publicId,
-                                           systemId,
-                                           superResolvedEntity));
     if (superResolvedEntity != null)
-    {
       systemId = superResolvedEntity;
-    }
+    getLog ().debug ("  Parent resolver has resolved publicId [" +
+                     publicId +
+                     "], systemId [" +
+                     systemId +
+                     "] to [" +
+                     superResolvedEntity +
+                     "].");
 
     if (systemId == null)
     {
@@ -74,9 +77,7 @@ public class MavenCatalogResolver extends com.sun.org.apache.xml.internal.resolv
       final URI uri = new URI (systemId);
       if (URI_SCHEME_MAVEN.equals (uri.getScheme ()))
       {
-        getLog ().debug (MessageFormat.format ("Resolving systemId [{1}] as Maven dependency resource.",
-                                               publicId,
-                                               systemId));
+        getLog ().debug ("  Resolving systemId [" + systemId + "] as Maven dependency resource.");
         final String schemeSpecificPart = uri.getSchemeSpecificPart ();
         try
         {
@@ -85,42 +86,53 @@ public class MavenCatalogResolver extends com.sun.org.apache.xml.internal.resolv
           {
             final URL url = dependencyResourceResolver.resolveDependencyResource (dependencyResource);
             final String resolved = url.toString ();
-            getLog ().debug (MessageFormat.format ("Resolved systemId [{1}] to [{2}].", publicId, systemId, resolved));
+            getLog ().debug ("  Resolved systemId [" + systemId + "] to [" + resolved + "].");
             return resolved;
           }
           catch (final Exception ex)
           {
-            getLog ().error (MessageFormat.format ("Error resolving dependency resource [{0}].", dependencyResource));
+            getLog ().error ("  Error resolving dependency resource [" + dependencyResource + "].");
           }
         }
         catch (final IllegalArgumentException iaex)
         {
-          getLog ().error (MessageFormat.format ("Error parsing dependency descriptor [{0}].", schemeSpecificPart));
+          getLog ().error ("  Error parsing dependency descriptor [" + schemeSpecificPart + "].");
 
         }
-        getLog ().error (MessageFormat.format ("Failed to resolve systemId [{1}] as dependency resource. " +
-                                               "Returning parent resolver result [{2}].",
-                                               publicId,
-                                               systemId,
-                                               superResolvedEntity));
+        getLog ().error ("  Failed to resolve systemId [" +
+                         systemId +
+                         "] as dependency resource. " +
+                         "Returning parent resolver result [" +
+                         superResolvedEntity +
+                         "].");
         return superResolvedEntity;
       }
-      getLog ().debug (MessageFormat.format ("SystemId [{1}] is not a Maven dependency resource URI. " +
-                                             "Returning parent resolver result [{2}].",
-                                             publicId,
-                                             systemId,
-                                             superResolvedEntity));
+      getLog ().debug ("  SystemId [" +
+                       systemId +
+                       "] is not a Maven dependency resource URI. " +
+                       "Returning parent resolver result [" +
+                       superResolvedEntity +
+                       "].");
       return superResolvedEntity;
     }
     catch (final URISyntaxException urisex)
     {
-      getLog ().debug (MessageFormat.format ("Coul not parse the systemId [{1}] as URI. " +
-                                             "Returning parent resolver result [{2}].",
-                                             publicId,
-                                             systemId,
-                                             superResolvedEntity));
+      getLog ().debug ("  Could not parse the systemId [" +
+                       systemId +
+                       "] as URI. " +
+                       "Returning parent resolver result [" +
+                       superResolvedEntity +
+                       "].");
       return superResolvedEntity;
     }
   }
 
+  @Override
+  public String toString ()
+  {
+    return new ToStringGenerator (this).append ("dependencyResourceResolver", dependencyResourceResolver)
+                                       .append ("catalogManager", catalogManager)
+                                       .append ("log", log)
+                                       .getToString ();
+  }
 }

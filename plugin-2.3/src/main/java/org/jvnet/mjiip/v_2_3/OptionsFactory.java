@@ -117,7 +117,7 @@ public class OptionsFactory implements
 
 	private Language createLanguage(String schemaLanguage)
 			throws MojoExecutionException {
-		if (StringUtils.isEmpty(schemaLanguage)) {
+		if (StringUtils.isEmptyTrimmed(schemaLanguage)) {
 			return null;
 		} else if ("AUTODETECT".equalsIgnoreCase(schemaLanguage))
 			return null; // nothing, it is AUTDETECT by default.
