@@ -7,7 +7,7 @@
   </parent>
   <groupId>com.helger.maven</groupId>
   <artifactId>maven-jaxb2-plugin-project</artifactId>
-  <version>0.14.2-SNAPSHOT</version>
+  <version>0.14.2</version>
   <packaging>pom</packaging>
   <name>Maven JAXB 2.x Plugin Project</name>
   <description>Maven2 plugin for JAXB 2.x XJC compiler to generate Java sources from XML Schemas.</description>
@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:phax/maven-jaxb2-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:phax/maven-jaxb2-plugin.git</developerConnection>
     <url>http://github.com/phax/maven-jaxb2-plugin</url>
-    <tag>HEAD</tag>
+    <tag>maven-jaxb2-plugin-project-0.14.2</tag>
   </scm>
   <developers>
     <developer>

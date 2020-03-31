@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-project</artifactId>
-		<version>0.14.2-SNAPSHOT</version>
+		<version>0.14.2</version>
 	</parent>
 	<prerequisites>
 		<maven>${maven.version}</maven>
