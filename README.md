@@ -32,7 +32,7 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
       <plugin>
         <groupId>com.helger.maven</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.1</version>
+        <version>0.14.2</version>
         <executions>
           <execution>
             <goals>
@@ -58,9 +58,7 @@ If you need a specific JAXB version, you can explicitly use one of the following
 
 ### Java versions
 
-Supported Java versions are `1.7`, `1.8`, `9` (only `maven-jaxb2-plugin` and `maven-jaxb23-plugin`).
-
-Java version `1.6` is no longer supported (since version `0.14.0`).
+Supported Java versions are `1.8` and onwards.
 
 ## [Documentation](https://github.com/highsource/maven-jaxb2-plugin/wiki)
 
