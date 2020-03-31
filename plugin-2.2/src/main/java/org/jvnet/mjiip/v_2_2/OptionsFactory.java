@@ -15,121 +15,128 @@ import com.sun.tools.xjc.Language;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.api.SpecVersion;
 
-public class OptionsFactory implements
-		org.jvnet.jaxb2.maven2.OptionsFactory<Options> {
-	/**
-	 * Creates and initializes an instance of XJC options.
-	 *
-	 */
-	public Options createOptions(OptionsConfiguration optionsConfiguration)
-			throws MojoExecutionException {
-		final Options options = new Options();
+public class OptionsFactory implements org.jvnet.jaxb2.maven2.IOptionsFactory <Options>
+{
+  /**
+   * Creates and initializes an instance of XJC options.
+   */
+  public Options createOptions (final OptionsConfiguration optionsConfiguration) throws MojoExecutionException
+  {
+    final Options options = new Options ();
+    options.verbose = optionsConfiguration.isVerbose ();
+    options.debugMode = optionsConfiguration.isDebugMode ();
 
-		options.verbose = optionsConfiguration.isVerbose();
-		options.debugMode = optionsConfiguration.isDebugMode();
+    options.classpaths.addAll (optionsConfiguration.getPlugins ());
 
-		options.classpaths.addAll(optionsConfiguration.getPlugins());
+    options.target = SpecVersion.V2_2;
 
-		options.target = SpecVersion.V2_2;
+    final String encoding = optionsConfiguration.getEncoding ();
 
-		final String encoding = optionsConfiguration.getEncoding();
+    if (encoding != null)
+    {
+      options.encoding = createEncoding (encoding);
+    }
 
-		if (encoding != null) {
-			options.encoding = createEncoding(encoding);
-		}
+    options.setSchemaLanguage (createLanguage (optionsConfiguration.getSchemaLanguage ()));
 
-		options.setSchemaLanguage(createLanguage(optionsConfiguration
-				.getSchemaLanguage()));
+    options.entityResolver = optionsConfiguration.getEntityResolver ();
 
-		options.entityResolver = optionsConfiguration.getEntityResolver();
+    for (final InputSource grammar : optionsConfiguration.getGrammars ())
+    {
+      options.addGrammar (grammar);
+    }
 
-		for (InputSource grammar : optionsConfiguration.getGrammars()) {
-			options.addGrammar(grammar);
-		}
+    for (final InputSource bindFile : optionsConfiguration.getBindFiles ())
+    {
+      options.addBindFile (bindFile);
+    }
 
-		for (InputSource bindFile : optionsConfiguration.getBindFiles()) {
-			options.addBindFile(bindFile);
-		}
+    // Setup Other Options
 
-		// Setup Other Options
+    options.defaultPackage = optionsConfiguration.getGeneratePackage ();
+    options.targetDir = optionsConfiguration.getGenerateDirectory ();
 
-		options.defaultPackage = optionsConfiguration.getGeneratePackage();
-		options.targetDir = optionsConfiguration.getGenerateDirectory();
+    options.strictCheck = optionsConfiguration.isStrict ();
+    options.readOnly = optionsConfiguration.isReadOnly ();
+    options.packageLevelAnnotations = optionsConfiguration.isPackageLevelAnnotations ();
+    options.noFileHeader = optionsConfiguration.isNoFileHeader ();
+    options.enableIntrospection = optionsConfiguration.isEnableIntrospection ();
+    options.disableXmlSecurity = optionsConfiguration.isDisableXmlSecurity ();
+    if (optionsConfiguration.getAccessExternalSchema () != null)
+    {
+      System.setProperty ("javax.xml.accessExternalSchema", optionsConfiguration.getAccessExternalSchema ());
+    }
+    if (optionsConfiguration.getAccessExternalDTD () != null)
+    {
+      System.setProperty ("javax.xml.accessExternalDTD", optionsConfiguration.getAccessExternalDTD ());
+    }
+    if (optionsConfiguration.isEnableExternalEntityProcessing ())
+    {
+      System.setProperty ("enableExternalEntityProcessing", Boolean.TRUE.toString ());
+    }
+    options.contentForWildcard = optionsConfiguration.isContentForWildcard ();
 
-		options.strictCheck = optionsConfiguration.isStrict();
-		options.readOnly = optionsConfiguration.isReadOnly();
-		options.packageLevelAnnotations = optionsConfiguration
-				.isPackageLevelAnnotations();
-		options.noFileHeader = optionsConfiguration.isNoFileHeader();
-		options.enableIntrospection = optionsConfiguration
-				.isEnableIntrospection();
-		options.disableXmlSecurity = optionsConfiguration
-				.isDisableXmlSecurity();
-		if (optionsConfiguration.getAccessExternalSchema() != null) {
-			System.setProperty("javax.xml.accessExternalSchema",
-					optionsConfiguration.getAccessExternalSchema());
-		}
-		if (optionsConfiguration.getAccessExternalDTD() != null) {
-			System.setProperty("javax.xml.accessExternalDTD",
-					optionsConfiguration.getAccessExternalDTD());
-		}
-		if (optionsConfiguration.isEnableExternalEntityProcessing()) {
-			System.setProperty("enableExternalEntityProcessing", Boolean.TRUE.toString());
-		}
-		options.contentForWildcard = optionsConfiguration
-				.isContentForWildcard();
+    if (optionsConfiguration.isExtension ())
+    {
+      options.compatibilityMode = Options.EXTENSION;
+    }
 
-		if (optionsConfiguration.isExtension()) {
-			options.compatibilityMode = Options.EXTENSION;
-		}
+    final List <String> arguments = optionsConfiguration.getArguments ();
+    try
+    {
+      options.parseArguments (arguments.toArray (new String [arguments.size ()]));
+    }
 
-		final List<String> arguments = optionsConfiguration.getArguments();
-		try {
-			options.parseArguments(arguments.toArray(new String[arguments
-					.size()]));
-		}
+    catch (final BadCommandLineException bclex)
+    {
+      throw new MojoExecutionException ("Error parsing the command line [" + arguments + "]", bclex);
+    }
 
-		catch (BadCommandLineException bclex) {
-			throw new MojoExecutionException("Error parsing the command line ["
-					+ arguments + "]", bclex);
-		}
+    return options;
+  }
 
-		return options;
-	}
+  private String createEncoding (final String encoding) throws MojoExecutionException
+  {
+    if (encoding == null)
+    {
+      return null;
+    }
+    try
+    {
+      if (!Charset.isSupported (encoding))
+      {
+        throw new MojoExecutionException (MessageFormat.format ("Unsupported encoding [{0}].", encoding));
+      }
+      return encoding;
+    }
+    catch (final IllegalCharsetNameException icne)
+    {
+      throw new MojoExecutionException (MessageFormat.format ("Unsupported encoding [{0}].", encoding));
+    }
 
-	private String createEncoding(String encoding)
-			throws MojoExecutionException {
-		if (encoding == null) {
-			return null;
-		}
-		try {
-			if (!Charset.isSupported(encoding)) {
-				throw new MojoExecutionException(MessageFormat.format(
-						"Unsupported encoding [{0}].", encoding));
-			}
-			return encoding;
-		} catch (IllegalCharsetNameException icne) {
-			throw new MojoExecutionException(MessageFormat.format(
-					"Unsupported encoding [{0}].", encoding));
-		}
+  }
 
-	}
-
-	private Language createLanguage(String schemaLanguage)
-			throws MojoExecutionException {
-		if (StringUtils.isEmpty(schemaLanguage)) {
-			return null;
-		} else if ("AUTODETECT".equalsIgnoreCase(schemaLanguage))
-			return null; // nothing, it is AUTDETECT by default.
-		else if ("XMLSCHEMA".equalsIgnoreCase(schemaLanguage))
-			return Language.XMLSCHEMA;
-		else if ("DTD".equalsIgnoreCase(schemaLanguage))
-			return Language.DTD;
-		else if ("WSDL".equalsIgnoreCase(schemaLanguage))
-			return Language.WSDL;
-		else {
-			throw new MojoExecutionException("Unknown schemaLanguage ["
-					+ schemaLanguage + "].");
-		}
-	}
+  private Language createLanguage (final String schemaLanguage) throws MojoExecutionException
+  {
+    if (StringUtils.isEmpty (schemaLanguage))
+    {
+      return null;
+    }
+    else
+      if ("AUTODETECT".equalsIgnoreCase (schemaLanguage))
+        return null; // nothing, it is AUTDETECT by default.
+      else
+        if ("XMLSCHEMA".equalsIgnoreCase (schemaLanguage))
+          return Language.XMLSCHEMA;
+        else
+          if ("DTD".equalsIgnoreCase (schemaLanguage))
+            return Language.DTD;
+          else
+            if ("WSDL".equalsIgnoreCase (schemaLanguage))
+              return Language.WSDL;
+            else
+            {
+              throw new MojoExecutionException ("Unknown schemaLanguage [" + schemaLanguage + "].");
+            }
+  }
 }

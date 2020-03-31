@@ -15,10 +15,10 @@ import com.sun.tools.xjc.Options;
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.COMPILE, requiresDependencyCollection = ResolutionScope.COMPILE, threadSafe = true)
 public class XJC2Mojo extends XJC23Mojo {
 
-	private final org.jvnet.jaxb2.maven2.OptionsFactory<Options> optionsFactory = new OptionsFactory();
+	private final org.jvnet.jaxb2.maven2.IOptionsFactory<Options> optionsFactory = new OptionsFactory();
 
 	@Override
-	protected org.jvnet.jaxb2.maven2.OptionsFactory<Options> getOptionsFactory() {
+	protected org.jvnet.jaxb2.maven2.IOptionsFactory<Options> getOptionsFactory() {
 		return optionsFactory;
 	}
 }

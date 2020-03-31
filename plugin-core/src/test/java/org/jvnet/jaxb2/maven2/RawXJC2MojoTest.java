@@ -48,7 +48,7 @@ public class RawXJC2MojoTest {
         final RawXJC2Mojo<Void> mojo = new RawXJC2Mojo<Void>() {
 			
 			@Override
-			protected OptionsFactory<Void> getOptionsFactory() {
+			protected IOptionsFactory<Void> getOptionsFactory() {
 				throw new UnsupportedOperationException();
 			}
 			

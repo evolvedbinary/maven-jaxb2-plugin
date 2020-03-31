@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -68,7 +69,6 @@ import org.jvnet.jaxb2.maven2.resolver.tools.MavenCatalogResolver;
 import org.jvnet.jaxb2.maven2.resolver.tools.ReResolvingEntityResolverWrapper;
 import org.jvnet.jaxb2.maven2.util.ArtifactUtils;
 import org.jvnet.jaxb2.maven2.util.CollectionUtils;
-import org.jvnet.jaxb2.maven2.util.CollectionUtils.Function;
 import org.jvnet.jaxb2.maven2.util.IOUtils;
 import org.jvnet.jaxb2.maven2.util.LocaleUtils;
 import org.sonatype.plexus.build.incremental.BuildContext;
@@ -915,12 +915,8 @@ public abstract class RawXJC2Mojo <O> extends AbstractXJC2Mojo <O>
       getLog ().warn ("Configuration element [otherDepends] is deprecated, please use [otherDependsIncludes] and [otherDependsExcludes] instead.");
 
       for (final File file : getOtherDepends ())
-      {
         if (file != null)
-        {
           dependsURIs.add (file.toURI ());
-        }
-      }
     }
     if (getOtherDependsIncludes () != null)
     {

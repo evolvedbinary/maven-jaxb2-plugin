@@ -35,10 +35,10 @@ import com.sun.xml.xsom.XSSchemaSet;
 public class XJC23Mojo extends RawXJC2Mojo <Options>
 {
 
-  private final org.jvnet.jaxb2.maven2.OptionsFactory <Options> optionsFactory = new OptionsFactory ();
+  private final org.jvnet.jaxb2.maven2.IOptionsFactory <Options> optionsFactory = new OptionsFactory ();
 
   @Override
-  protected org.jvnet.jaxb2.maven2.OptionsFactory <Options> getOptionsFactory ()
+  protected org.jvnet.jaxb2.maven2.IOptionsFactory <Options> getOptionsFactory ()
   {
     return optionsFactory;
   }

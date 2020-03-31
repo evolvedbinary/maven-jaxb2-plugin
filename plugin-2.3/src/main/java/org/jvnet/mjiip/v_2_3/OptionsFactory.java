@@ -16,7 +16,7 @@ import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.api.SpecVersion;
 
 public class OptionsFactory implements
-		org.jvnet.jaxb2.maven2.OptionsFactory<Options> {
+		org.jvnet.jaxb2.maven2.IOptionsFactory<Options> {
 	/**
 	 * Creates and initializes an instance of XJC options.
 	 *

@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 
 import org.apache.maven.plugin.logging.Log;
 import org.jvnet.jaxb2.maven2.DependencyResource;
-import org.jvnet.jaxb2.maven2.DependencyResourceResolver;
+import org.jvnet.jaxb2.maven2.IDependencyResourceResolver;
 import org.jvnet.jaxb2.maven2.plugin.logging.NullLog;
 
 import com.sun.org.apache.xml.internal.resolver.CatalogManager;
@@ -16,18 +16,18 @@ public class MavenCatalogResolver extends com.sun.org.apache.xml.internal.resolv
 {
 
   public static final String URI_SCHEME_MAVEN = "maven";
-  private final DependencyResourceResolver dependencyResourceResolver;
+  private final IDependencyResourceResolver dependencyResourceResolver;
   private final CatalogManager catalogManager;
   private final Log log;
 
   public MavenCatalogResolver (final CatalogManager catalogManager,
-                               final DependencyResourceResolver dependencyResourceResolver)
+                               final IDependencyResourceResolver dependencyResourceResolver)
   {
     this (catalogManager, dependencyResourceResolver, NullLog.INSTANCE);
   }
 
   public MavenCatalogResolver (final CatalogManager catalogManager,
-                               final DependencyResourceResolver dependencyResourceResolver,
+                               final IDependencyResourceResolver dependencyResourceResolver,
                                final Log log)
   {
     super (catalogManager);

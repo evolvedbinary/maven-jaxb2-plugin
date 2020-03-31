@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.jvnet.mjiip.v_2_2;
 
@@ -14,47 +14,51 @@ import com.sun.codemodel.CodeWriter;
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.writer.FilterCodeWriter;
 
-public class LoggingCodeWriter extends FilterCodeWriter {
+public class LoggingCodeWriter extends FilterCodeWriter
+{
 
-	private final boolean verbose;
-	private final Log log;
+  private final boolean verbose;
+  private final Log log;
 
-	public LoggingCodeWriter(CodeWriter output, Log log, boolean verbose) {
-		super(output);
-		this.log = log;
-		this.verbose = verbose;
-	}
+  public LoggingCodeWriter (final CodeWriter output, final Log log, final boolean verbose)
+  {
+    super (output);
+    this.log = log;
+    this.verbose = verbose;
+  }
 
-	public Writer openSource(JPackage pkg, String fileName) throws IOException {
-		if (verbose) {
-			if (pkg.isUnnamed())
-				log.info("XJC writing: " + fileName);
-			else
-				log.info("XJC writing: "
-						+ pkg.name().replace('.', File.separatorChar)
-						+ File.separatorChar + fileName);
-		}
+  @Override
+  public Writer openSource (final JPackage pkg, final String fileName) throws IOException
+  {
+    if (verbose)
+    {
+      if (pkg.isUnnamed ())
+        log.info ("XJC writing: " + fileName);
+      else
+        log.info ("XJC writing: " + pkg.name ().replace ('.', File.separatorChar) + File.separatorChar + fileName);
+    }
 
-		return core.openSource(pkg, fileName);
-	}
+    return core.openSource (pkg, fileName);
+  }
 
-	public OutputStream openBinary(JPackage pkg, String fileName)
-			throws IOException {
-		if (verbose) {
-			if (pkg.isUnnamed())
-				log.info("XJC writing: " + fileName);
-			else
-				log.info("XJC writing: "
-						+ pkg.name().replace('.', File.separatorChar)
-						+ File.separatorChar + fileName);
-		}
+  @Override
+  public OutputStream openBinary (final JPackage pkg, final String fileName) throws IOException
+  {
+    if (verbose)
+    {
+      if (pkg.isUnnamed ())
+        log.info ("XJC writing: " + fileName);
+      else
+        log.info ("XJC writing: " + pkg.name ().replace ('.', File.separatorChar) + File.separatorChar + fileName);
+    }
 
-		return core.openBinary(pkg, fileName);
-	}
+    return core.openBinary (pkg, fileName);
+  }
 
-	@Override
-	public void close() throws IOException {
-		core.close();
-	}
+  @Override
+  public void close () throws IOException
+  {
+    core.close ();
+  }
 
 }

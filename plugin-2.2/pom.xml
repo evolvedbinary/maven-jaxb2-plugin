@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>${jaxb22.version}</version>
+			<version>${jaxb22.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<!-- Start of jaxb-runtime dependencies -->
 		<dependency>
@@ -35,12 +35,12 @@
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb22.version}</version>
+			<version>${jaxb22.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>txw2</artifactId>
-			<version>${jaxb22.version}</version>
+			<version>${jaxb22.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>com.sun.istack</groupId>
@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-xjc</artifactId>
-			<version>${jaxb22.version}</version>
+			<version>${jaxb22.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<!-- Start jaxb-xjc dependencies -->
 		<dependency>
@@ -102,13 +102,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

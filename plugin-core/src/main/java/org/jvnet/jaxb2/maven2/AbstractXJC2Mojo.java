@@ -38,7 +38,7 @@ import org.jvnet.jaxb2.maven2.util.IOUtils;
 import org.sonatype.plexus.build.incremental.BuildContext;
 import org.sonatype.plexus.build.incremental.DefaultBuildContext;
 
-public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements DependencyResourceResolver
+public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDependencyResourceResolver
 {
 
   @Parameter (defaultValue = "${settings}", readonly = true)
@@ -514,7 +514,9 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
    * <code>doe/ray/org/here</code>.
    * </p>
    */
-  @Parameter (defaultValue = "${project.build.directory}/generated-sources/xjc", property = "maven.xjc2.generateDirectory", required = true)
+  @Parameter (defaultValue = "${project.build.directory}/generated-sources/xjc",
+              property = "maven.xjc2.generateDirectory",
+              required = true)
   private File generateDirectory;
 
   public File getGenerateDirectory ()
@@ -1436,7 +1438,6 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
 
     if (getProject ().getDependencyManagement () != null)
     {
-      @SuppressWarnings ("unchecked")
       final List <Dependency> dependencies = getProject ().getDependencyManagement ().getDependencies ();
       merge (dependencyResource, dependencies);
     }
@@ -1455,7 +1456,6 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
 
     try
     {
-      @SuppressWarnings ("unchecked")
       final Set <Artifact> artifacts = MavenMetadataSource.createArtifacts (getArtifactFactory (),
                                                                             Arrays.<Dependency> asList (dependencyResource),
                                                                             Artifact.SCOPE_RUNTIME,
@@ -1523,19 +1523,16 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
                                                                 resource));
       }
     }
-    else
+    try
     {
-      try
-      {
-        return new URL ("jar:" + artifactFile.toURI ().toURL ().toExternalForm () + "!/" + resource);
-      }
-      catch (final MalformedURLException murlex)
-      {
-        throw new MojoExecutionException (MessageFormat.format ("Could not create an URL for dependency file [{0}] and resource [{1}].",
-                                                                artifactFile,
-                                                                resource));
+      return new URL ("jar:" + artifactFile.toURI ().toURL ().toExternalForm () + "!/" + resource);
+    }
+    catch (final MalformedURLException murlex)
+    {
+      throw new MojoExecutionException (MessageFormat.format ("Could not create an URL for dependency file [{0}] and resource [{1}].",
+                                                              artifactFile,
+                                                              resource));
 
-      }
     }
   }
 
@@ -1561,7 +1558,6 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
     final String draftDirectory = fileset.getDirectory ();
     final String directory = draftDirectory == null ? defaultDirectory : draftDirectory;
     final List <String> includes;
-    @SuppressWarnings ("unchecked")
     final List <String> draftIncludes = fileset.getIncludes ();
     if (draftIncludes == null || draftIncludes.isEmpty ())
     {
@@ -1573,7 +1569,6 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
     }
 
     final List <String> excludes;
-    @SuppressWarnings ("unchecked")
     final List <String> draftExcludes = fileset.getExcludes ();
     if (draftExcludes == null || draftExcludes.isEmpty ())
     {
@@ -1631,7 +1626,7 @@ public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements Depen
     }
   }
 
-  protected abstract OptionsFactory <O> getOptionsFactory ();
+  protected abstract IOptionsFactory <O> getOptionsFactory ();
 
   protected void cleanPackageDirectory (final File packageDirectory)
   {

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
@@ -19,105 +20,109 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.artifact.InvalidDependencyVersionException;
 import org.apache.maven.project.artifact.MavenMetadataSource;
-import org.jvnet.jaxb2.maven2.util.CollectionUtils.Function;
 
-public class ArtifactUtils {
+public final class ArtifactUtils
+{
+  private ArtifactUtils ()
+  {}
 
-	private ArtifactUtils() {
+  public static Collection <Artifact> resolveTransitively (final ArtifactFactory artifactFactory,
+                                                           final ArtifactResolver artifactResolver,
+                                                           final ArtifactRepository localRepository,
+                                                           final ArtifactMetadataSource artifactMetadataSource,
+                                                           final Dependency [] dependencies,
+                                                           final MavenProject project) throws InvalidDependencyVersionException,
+                                                                                       ArtifactResolutionException,
+                                                                                       ArtifactNotFoundException
+  {
+    if (dependencies == null)
+    {
+      return Collections.emptyList ();
+    }
 
-	}
+    final Set <Artifact> artifacts = MavenMetadataSource.createArtifacts (artifactFactory,
+                                                                          Arrays.asList (dependencies),
+                                                                          "runtime",
+                                                                          null,
+                                                                          project);
 
-	public static Collection<Artifact> resolveTransitively(
-			final ArtifactFactory artifactFactory,
-			final ArtifactResolver artifactResolver,
-			final ArtifactRepository localRepository,
-			final ArtifactMetadataSource artifactMetadataSource,
-			final Dependency[] dependencies, final MavenProject project)
-			throws InvalidDependencyVersionException,
-			ArtifactResolutionException, ArtifactNotFoundException {
-		if (dependencies == null) {
-			return Collections.emptyList();
-		}
+    final ArtifactResolutionResult artifactResolutionResult = artifactResolver.resolveTransitively (artifacts,
 
-		@SuppressWarnings("unchecked")
-		final Set<Artifact> artifacts = MavenMetadataSource.createArtifacts(
-				artifactFactory, Arrays.asList(dependencies), "runtime", null,
-				project);
+                                                                                                    project.getArtifact (),
 
-		final ArtifactResolutionResult artifactResolutionResult = artifactResolver
-				.resolveTransitively(artifacts,
+                                                                                                    project.getRemoteArtifactRepositories (),
+                                                                                                    localRepository,
+                                                                                                    artifactMetadataSource);
 
-				project.getArtifact(),
+    return artifactResolutionResult.getArtifacts ();
+  }
 
-				project.getRemoteArtifactRepositories(), localRepository,
-						artifactMetadataSource);
+  public static Collection <Artifact> resolve (final ArtifactFactory artifactFactory,
+                                               final ArtifactResolver artifactResolver,
+                                               final ArtifactRepository localRepository,
+                                               final ArtifactMetadataSource artifactMetadataSource,
+                                               final Dependency [] dependencies,
+                                               final MavenProject project) throws InvalidDependencyVersionException,
+                                                                           ArtifactResolutionException,
+                                                                           ArtifactNotFoundException
+  {
+    if (dependencies == null)
+    {
+      return Collections.emptyList ();
+    }
 
-		@SuppressWarnings("unchecked")
-		final Set<Artifact> resolvedArtifacts = artifactResolutionResult
-				.getArtifacts();
+    final Set <Artifact> artifacts = MavenMetadataSource.createArtifacts (artifactFactory,
+                                                                          Arrays.asList (dependencies),
+                                                                          "runtime",
+                                                                          null,
+                                                                          project);
 
-		return resolvedArtifacts;
-	}
+    for (final Artifact artifact : artifacts)
+    {
+      artifactResolver.resolve (artifact,
 
-	public static Collection<Artifact> resolve(
-			final ArtifactFactory artifactFactory,
-			final ArtifactResolver artifactResolver,
-			final ArtifactRepository localRepository,
-			final ArtifactMetadataSource artifactMetadataSource,
-			final Dependency[] dependencies, final MavenProject project)
-			throws InvalidDependencyVersionException,
-			ArtifactResolutionException, ArtifactNotFoundException {
-		if (dependencies == null) {
-			return Collections.emptyList();
-		}
+                                project.getRemoteArtifactRepositories (),
+                                localRepository);
+    }
 
-		@SuppressWarnings("unchecked")
-		final Set<Artifact> artifacts = MavenMetadataSource.createArtifacts(
-				artifactFactory, Arrays.asList(dependencies), "runtime", null,
-				project);
+    return artifacts;
+  }
 
-		for (Artifact artifact : artifacts) {
-			artifactResolver.resolve(artifact,
+  public static final Function <Artifact, File> GET_FILE = argument -> argument.getFile ();
 
-			project.getRemoteArtifactRepositories(), localRepository);
-		}
+  public static final Collection <File> getFiles (final Collection <Artifact> artifacts)
+  {
+    return CollectionUtils.apply (artifacts, ArtifactUtils.GET_FILE);
+  }
 
-		final Set<Artifact> resolvedArtifacts = artifacts;
-		return resolvedArtifacts;
-	}
+  public static void mergeDependencyWithDefaults (final Dependency dep, final Dependency def)
+  {
+    if (dep.getScope () == null && def.getScope () != null)
+    {
+      dep.setScope (def.getScope ());
+      dep.setSystemPath (def.getSystemPath ());
+    }
 
-	public static final Function<Artifact, File> GET_FILE = new Function<Artifact, File>() {
-		public File eval(Artifact argument) {
-			return argument.getFile();
-		}
-	};
+    if (dep.getVersion () == null && def.getVersion () != null)
+    {
+      dep.setVersion (def.getVersion ());
+    }
 
-	public static final Collection<File> getFiles(Collection<Artifact> artifacts) {
-		return CollectionUtils.apply(artifacts, ArtifactUtils.GET_FILE);
-	}
+    if (dep.getClassifier () == null && def.getClassifier () != null)
+    {
+      dep.setClassifier (def.getClassifier ());
+    }
 
-	public static void mergeDependencyWithDefaults(Dependency dep, Dependency def) {
-		if (dep.getScope() == null && def.getScope() != null) {
-			dep.setScope(def.getScope());
-			dep.setSystemPath(def.getSystemPath());
-		}
-	
-		if (dep.getVersion() == null && def.getVersion() != null) {
-			dep.setVersion(def.getVersion());
-		}
-	
-		if (dep.getClassifier() == null && def.getClassifier() != null) {
-			dep.setClassifier(def.getClassifier());
-		}
-	
-		if (dep.getType() == null && def.getType() != null) {
-			dep.setType(def.getType());
-		}
-	
-		@SuppressWarnings("rawtypes")
-		List exclusions = dep.getExclusions();
-		if (exclusions == null || exclusions.isEmpty()) {
-			dep.setExclusions(def.getExclusions());
-		}
-	}
+    if (dep.getType () == null && def.getType () != null)
+    {
+      dep.setType (def.getType ());
+    }
+
+    @SuppressWarnings ("rawtypes")
+    final List exclusions = dep.getExclusions ();
+    if (exclusions == null || exclusions.isEmpty ())
+    {
+      dep.setExclusions (def.getExclusions ());
+    }
+  }
 }

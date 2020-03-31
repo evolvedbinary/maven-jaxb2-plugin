@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.Scanner;
-import org.jvnet.jaxb2.maven2.util.CollectionUtils.Function;
 import org.sonatype.plexus.build.incremental.BuildContext;
 import org.xml.sax.InputSource;
 
@@ -50,18 +50,14 @@ public class IOUtils
     return new InputSource (StringUtils.escapeSpace (uri.toString ()));
   }
 
-  public static final Function <File, URL> GET_URL = new Function <File, URL> ()
-  {
-    public URL eval (final File file)
+  public static final Function <File, URL> GET_URL = file -> {
+    try
     {
-      try
-      {
-        return file.toURI ().toURL ();
-      }
-      catch (final MalformedURLException muex)
-      {
-        throw new RuntimeException (muex);
-      }
+      return file.toURI ().toURL ();
+    }
+    catch (final MalformedURLException muex)
+    {
+      throw new RuntimeException (muex);
     }
   };
 
@@ -79,6 +75,8 @@ public class IOUtils
    *        exclusion pattern.
    * @param defaultExcludes
    *        default exclusion flag.
+   * @param aLogger
+   *        Logger
    * @return Files from the given directory which satisfy given patterns. The
    *         files are {@link File#getCanonicalFile() canonical}.
    * @throws IOException

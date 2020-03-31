@@ -1,4 +1,4 @@
-# JAXB2 Maven Plugin #
+# JAXB2 Maven Plugin
 
 ## This is a fork of https://github.com/highsource/maven-jaxb2-plugin
 
@@ -18,33 +18,33 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
 > If you are interested in the Mojohaus JAXB2 Maven Plugin (`org.codehaus.mojo:jaxb2-maven-plugin`),
 > please follow [this link](https://github.com/mojohaus/jaxb2-maven-plugin) to the corresponding website.
 
-## Quick start ##
+## Quick start
 
 * Put your schemas (`*.xsd`) and bindings (`*.xjb`) into the `src/main/resources` folder.
 * Add the plugin to your `pom.xml`:
 
 ```xml
 <project ...>
-	...
-	<build>
-		<plugins>
-			...
-			<plugin>
-				<groupId>com.helger.maven</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.14.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			...
-		</plugins>
-	</build>
-	...
+  ...
+  <build>
+    <plugins>
+      ...
+      <plugin>
+        <groupId>com.helger.maven</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <version>0.14.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
 </project>
 ```
 
@@ -62,10 +62,9 @@ Supported Java versions are `1.7`, `1.8`, `9` (only `maven-jaxb2-plugin` and `ma
 
 Java version `1.6` is no longer supported (since version `0.14.0`).
 
-## [Documentation](https://github.com/highsource/maven-jaxb2-plugin/wiki) ##
+## [Documentation](https://github.com/highsource/maven-jaxb2-plugin/wiki)
 
-Please refer to the [wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki) for the full documentation.
-
+Please refer to the [Wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki) for the full documentation.
 
 * [User Guide](https://github.com/highsource/maven-jaxb2-plugin/wiki/User-Guide)
 * Maven Documentation  (Work in progress)
@@ -77,8 +76,7 @@ Please refer to the [wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki
 * [Support](https://github.com/highsource/maven-jaxb2-plugin/wiki/Support)
 * [License](https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE)
 
-
-## Disclaimer ##
+## Disclaimer
 
 This project is not developed, supported or in any other way affiliated with Apache. The `org.jvnet.jaxb2.maven2:maven-jaxb2-plugin` is not an Apache product (and does not pretend to be one), it is a completely independent development.
 
