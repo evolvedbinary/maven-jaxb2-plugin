@@ -60,19 +60,19 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     if (getVerbose ())
     {
       final InputSource [] aGrammars = options.getGrammars ();
-      getLog ().info ("Parsing " + aGrammars.length + " input schema(s)...");
-      getLog ().info ("Input schemas: " + Arrays.toString (aGrammars));
+      getLog ().debug ("Parsing " + aGrammars.length + " input schema(s)...");
+      getLog ().debug ("Input schemas: " + Arrays.toString (aGrammars));
       for (final InputSource x : aGrammars)
       {
-        getLog ().info ("  Next InputSource");
+        getLog ().debug ("  Next InputSource");
         if (x.getPublicId () != null)
-          getLog ().info ("    publicID: " + x.getPublicId ());
+          getLog ().debug ("    publicID: " + x.getPublicId ());
         if (x.getSystemId () != null)
-          getLog ().info ("    systemID: " + x.getSystemId ());
+          getLog ().debug ("    systemID: " + x.getSystemId ());
         if (x.getEncoding () != null)
-          getLog ().info ("    encoding: " + x.getEncoding ());
+          getLog ().debug ("    encoding: " + x.getEncoding ());
       }
-      getLog ().info ("Entity resolver: " + options.entityResolver);
+      getLog ().debug ("Entity resolver: " + options.entityResolver);
     }
 
     final LoggingErrorReceiver er = new LoggingErrorReceiver ("Error while parsing schema(s).",
@@ -85,6 +85,8 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
       getLog ().info ("Starting SchemaConstraintChecker");
       if (!SchemaConstraintChecker.check (schemas, er, getEntityResolver (), false))
         getLog ().error ("SchemaConstraintChecker failed");
+      else
+        getLog ().info ("SchemaConstraintChecker finished successfully");
     }
 
     final Model model = ModelLoader.load (options, new JCodeModel (), er);
