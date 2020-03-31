@@ -82,11 +82,11 @@ public class XJC23Mojo extends RawXJC2Mojo <Options>
     {
       // Fake check
       final InputSource [] schemas = options.getGrammars ();
-      getLog ().info ("Starting SchemaConstraintChecker");
+      getLog ().debug ("Starting SchemaConstraintChecker");
       if (!SchemaConstraintChecker.check (schemas, er, getEntityResolver (), false))
         getLog ().error ("SchemaConstraintChecker failed");
       else
-        getLog ().info ("SchemaConstraintChecker finished successfully");
+        getLog ().debug ("SchemaConstraintChecker finished successfully");
     }
 
     final Model model = ModelLoader.load (options, new JCodeModel (), er);
