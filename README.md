@@ -32,7 +32,7 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
       <plugin>
         <groupId>com.helger.maven</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.2</version>
+        <version>0.14.3</version>
         <executions>
           <execution>
             <goals>
