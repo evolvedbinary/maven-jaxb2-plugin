@@ -55,7 +55,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.version>2.2.1</maven.version>
     <jaxb22.version>2.2.11</jaxb22.version>
-    <jaxb23.version>2.3.3-b02</jaxb23.version>
+    <!-- 2.3.3b02 does not work with the plugin anymore on Java 9+ -->
+    <jaxb23.version>2.3.2</jaxb23.version>
     <jaxb-api.version>2.3.1</jaxb-api.version>
     <jaxb.version>${jaxb23.version}</jaxb.version>
     <stax-ex.version>1.8.2</stax-ex.version>
