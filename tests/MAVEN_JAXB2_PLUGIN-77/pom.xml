@@ -12,7 +12,7 @@
 	<name>Maven JAXB 2.x Plugin Tests [MAVEN_JAXB2_PLUGIN-77]</name>
 	<modules>
 		<module>common-types</module>
-		<module>service</module>
+		<!-- module>service</module -->
 	</modules>
 	<dependencies>
 		<dependency>
