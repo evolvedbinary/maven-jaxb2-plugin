@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>maven-jaxb2-plugin-tests-res</artifactId>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests</artifactId>
-		<version>0.14.1-SNAPSHOT</version>
+		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [res]</name>
@@ -16,12 +16,12 @@
 			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
-			<artifactId>maven-jaxb2-plugin-tests-po</artifactId>
+			<groupId>com.helger.maven</groupId>
+			<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
+			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-testing</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -29,8 +29,8 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin-tests-po</artifactId>
+				<groupId>com.helger.maven</groupId>
+				<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
@@ -38,7 +38,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
 					<execution>
@@ -68,8 +68,8 @@
 								</schema>
 								<schema>
 									<dependencyResource>
-										<groupId>org.jvnet.jaxb2.maven2</groupId>
-										<artifactId>maven-jaxb2-plugin-tests-po</artifactId>
+										<groupId>com.helger.maven</groupId>
+										<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 										<!-- Can be defined in project dependencies or dependency management -->
 										<!--version>${project.version}</version-->
 										<resource>purchaseorder.xsd</resource>
@@ -77,7 +77,7 @@
 								</schema>
 								<schema>
 									<dependencyResource>
-										<groupId>org.jvnet.jaxb2.maven2</groupId>
+										<groupId>com.helger.maven</groupId>
 										<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
 										<version>${project.version}</version>
 										<resource>purchaseorder.xsd</resource>

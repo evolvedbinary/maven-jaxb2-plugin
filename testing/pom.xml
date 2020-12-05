@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-project</artifactId>
-		<version>0.14.1-SNAPSHOT</version>
+		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<dependencies>
 		<dependency>
@@ -15,7 +15,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-  <groupId>com.helger.maven</groupId>
+  			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin</artifactId>
 			<scope>compile</scope>
 		</dependency>
