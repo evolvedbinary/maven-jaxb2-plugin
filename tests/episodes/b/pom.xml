@@ -3,16 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests-episodes</artifactId>
-		<version>0.14.1-SNAPSHOT</version>
+		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>maven-jaxb2-plugin-tests-episodes-b</artifactId>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [episodes:b]</name>
 	<dependencies>
 		<dependency>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
+			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
@@ -22,13 +22,13 @@
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
 				<configuration>
 					<extension>true</extension>
 					<episodes>
 						<episode>
-							<groupId>org.jvnet.jaxb2.maven2</groupId>
+							<groupId>com.helger.maven</groupId>
 							<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
 						</episode>
 					</episodes>

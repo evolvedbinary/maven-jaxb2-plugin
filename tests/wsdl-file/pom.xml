@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>maven-jaxb2-plugin-tests-wsdl-file</artifactId>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests</artifactId>
 		<version>0.13.2-SNAPSHOT</version>
 	</parent>
@@ -25,7 +25,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<configuration>
 					<schemaIncludes><include>*.wsdl</include></schemaIncludes>

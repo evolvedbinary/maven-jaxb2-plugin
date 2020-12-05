@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>maven-jaxb2-plugin-tests-rnc</artifactId>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests</artifactId>
 		<version>0.12.4-SNAPSHOT</version>
 	</parent>
@@ -21,7 +21,7 @@
 			<version>${jaxb.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
+			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-testing</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -29,7 +29,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<version>${project.version}</version>
 				<executions>

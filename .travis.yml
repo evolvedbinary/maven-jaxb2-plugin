@@ -23,10 +23,10 @@ jobs:
     - stage: test
       jdk: openjdk8
       script:
-        - mvn clean install -B -V -U
+        - mvn -Ptests clean install -B -V -U
       after_success:
         - mvn deploy --settings travis-settings.xml -DskipTests=true -B
     - stage: test
       jdk: openjdk11
       script:
-        - mvn clean install -B -V -U
+        - mvn -Ptests clean install -B -V -U

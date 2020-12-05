@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>maven-jaxb2-plugin-tests-xjc-simple</artifactId>
 	<parent>
-		<groupId>org.jvnet.jaxb2.maven2</groupId>
+		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests</artifactId>
-		<version>0.14.1-SNAPSHOT</version>
+		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [xjc-simple]</name>
@@ -23,7 +23,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
 					<execution>
@@ -42,7 +42,7 @@
 								<plugin>
 									<groupId>org.jvnet.jaxb2_commons</groupId>
 									<artifactId>jaxb2-basics</artifactId>
-									<version>0.11.1</version>
+									<version>${jaxb2-basics.version}</version>
 								</plugin>
 							</plugins>
 							<extension>true</extension>
