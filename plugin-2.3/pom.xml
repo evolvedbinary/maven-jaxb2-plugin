@@ -14,7 +14,7 @@
 	</prerequisites>
 	<dependencies>
 		<dependency>
-  <groupId>com.helger.maven</groupId>
+			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-core</artifactId>
 		</dependency>
 		<dependency>

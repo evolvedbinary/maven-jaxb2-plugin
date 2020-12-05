@@ -56,14 +56,14 @@
     <maven.version>2.2.1</maven.version>
     <jaxb22.version>2.2.11</jaxb22.version>
     <!-- 2.3.3b02 does not work with the plugin anymore on Java 9+ -->
-    <jaxb23.version>2.3.2</jaxb23.version>
+    <jaxb23.version>2.3.3</jaxb23.version>
     <jaxb-api.version>2.3.1</jaxb-api.version>
     <jaxb.version>${jaxb23.version}</jaxb.version>
-    <stax-ex.version>1.8.2</stax-ex.version>
-    <fastinfoset.version>1.2.13</fastinfoset.version>
+    <stax-ex.version>1.8.3</stax-ex.version>
+    <fastinfoset.version>1.2.18</fastinfoset.version>
     <xsom.version>20140925</xsom.version>
-    <dtd-parser.version>1.2</dtd-parser.version>
-    <istack.version>3.0.5</istack.version>
+    <dtd-parser.version>1.4.3</dtd-parser.version>
+    <istack.version>3.0.11</istack.version>
     <activation.version>1.2.0</activation.version>
     <jaxb2-basics.version>0.12.0</jaxb2-basics.version>
     <maven.plugin.testing.version>2.1</maven.plugin.testing.version>
@@ -234,11 +234,6 @@
       <dependency>
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>codemodel</artifactId>
-        <version>${jaxb.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.sun.xml.bind.external</groupId>
-        <artifactId>rngom</artifactId>
         <version>${jaxb.version}</version>
       </dependency>
       <dependency>

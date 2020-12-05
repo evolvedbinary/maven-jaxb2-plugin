@@ -14,7 +14,7 @@
 	</prerequisites>
 	<dependencies>
 		<dependency>
-  <groupId>com.helger.maven</groupId>
+  			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-core</artifactId>
 		</dependency>
 		<dependency>
@@ -72,10 +72,6 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>codemodel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind.external</groupId>
-			<artifactId>rngom</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.dtd-parser</groupId>
