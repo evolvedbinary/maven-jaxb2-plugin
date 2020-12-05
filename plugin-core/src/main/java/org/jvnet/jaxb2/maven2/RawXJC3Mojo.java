@@ -15,19 +15,18 @@
 package org.jvnet.jaxb2.maven2;
 
 import com.sun.xml.txw2.annotation.XmlNamespace;
-
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlSchema;
 
 /**
- * Maven JAXB 2.x Mojo.
+ * Maven JAXB 3.x Mojo.
  *
  * @author Adam Retter (adam@evolvedbinary.com)
  * @param <O>
  *        type
  */
-public abstract class RawXJC2Mojo <O> extends RawXJCMojo<O, XmlSchema, XmlNamespace>
+public abstract class RawXJC3Mojo<O> extends RawXJCMojo<O, XmlSchema, XmlNamespace>
 {
-  private static final String JAXB_NSURI = "http://java.sun.com/xml/ns/jaxb";
+  private static final String JAXB_NSURI = "https://jakarta.ee/xml/ns/jaxb";
 
   @Override
   protected String getJaxbNamespaceUri() {
@@ -51,7 +50,7 @@ public abstract class RawXJC2Mojo <O> extends RawXJCMojo<O, XmlSchema, XmlNamesp
 
   @Override
   protected String getEpisodePackageInfoClassName() {
-    return "com.sun.xml.bind.v2.schemagen.episode.package-info";
+    return "org.glassfish.jaxb.core.v2.schemagen.episode.package-info";
   }
 
   @Override
