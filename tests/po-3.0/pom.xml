@@ -14,7 +14,6 @@
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>${jaxb30.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

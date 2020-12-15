@@ -64,7 +64,8 @@
     <!-- 2.3.3b02 does not work with the plugin anymore on Java 9+ -->
     <jaxb23.version>2.3.3</jaxb23.version>
     <jaxb30.version>3.0.0</jaxb30.version>
-    <jaxb-api.version>2.3.1</jaxb-api.version>
+    <jaxb2-api.version>2.3.1</jaxb2-api.version>
+    <jaxb3-api.version>3.0.0</jaxb3-api.version>
     <jaxb.version>${jaxb23.version}</jaxb.version>
     <stax-ex.version>1.8.3</stax-ex.version>
     <fastinfoset.version>1.2.18</fastinfoset.version>
@@ -183,18 +184,26 @@
         <artifactId>jaxb-runtime</artifactId>
         <version>${jaxb.version}</version>
       </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>${jaxb3-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>${jaxb30.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-xjc</artifactId>
+        <version>${jaxb30.version}</version>
+      </dependency>
 			<!-- Start of jaxb-runtime dependencies -->
-      <!-- 
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-core</artifactId>
-				<version>${jaxb.version}</version>
-			</dependency>
-       -->
       <dependency>
         <groupId>javax.xml.bind</groupId>
         <artifactId>jaxb-api</artifactId>
-        <version>${jaxb-api.version}</version>
+        <version>${jaxb2-api.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.jaxb</groupId>
