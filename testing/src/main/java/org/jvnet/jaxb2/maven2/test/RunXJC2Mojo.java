@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.project.MavenProject;
-import org.jvnet.jaxb2.maven2.AbstractXJC2Mojo;
+import org.jvnet.jaxb2.maven2.AbstractXJCMojo;
 import org.jvnet.mjiip.v_2.XJC2Mojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,17 +63,17 @@ public class RunXJC2Mojo extends TestCase {
 		return true;
 	}
 
-	public AbstractXJC2Mojo initMojo() {
-		final AbstractXJC2Mojo mojo = createMojo();
+	public AbstractXJCMojo initMojo() {
+		final AbstractXJCMojo mojo = createMojo();
 		configureMojo(mojo);
 		return mojo;
 	}
 
-	protected AbstractXJC2Mojo createMojo() {
+	protected AbstractXJCMojo createMojo() {
 		return new XJC2Mojo();
 	}
 
-	protected void configureMojo(final AbstractXJC2Mojo mojo) {
+	protected void configureMojo(final AbstractXJCMojo mojo) {
 		mojo.setProject(new MavenProject());
 		mojo.setSchemaDirectory(getSchemaDirectory());
 		mojo.setGenerateDirectory(getGeneratedDirectory());

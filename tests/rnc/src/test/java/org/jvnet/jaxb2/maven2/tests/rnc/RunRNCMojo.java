@@ -1,6 +1,6 @@
 package org.jvnet.jaxb2.maven2.tests.rnc;
 
-import org.jvnet.jaxb2.maven2.AbstractXJC2Mojo;
+import org.jvnet.jaxb2.maven2.AbstractXJCMojo;
 import org.jvnet.jaxb2.maven2.test.RunXJC2Mojo;
 
 import com.sun.tools.xjc.reader.Ring;
@@ -9,7 +9,7 @@ import com.sun.tools.xjc.reader.Ring;
 public class RunRNCMojo extends RunXJC2Mojo {
 
 	@Override
-	protected void configureMojo(AbstractXJC2Mojo mojo) {
+	protected void configureMojo(AbstractXJCMojo mojo) {
 		super.configureMojo(mojo);
 
 		// final ResourceEntry a_xsd = new ResourceEntry();

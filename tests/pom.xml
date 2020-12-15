@@ -18,6 +18,7 @@
 		<module>p o</module>
 		<module>po-2.2</module>
 		<module>po-2.3</module>
+		<module>po-3.0</module>
 		<module>po-scd</module>
 		<module>res</module>
 		<module>tse</module>
@@ -73,6 +74,19 @@
 				<plugin>
 					<groupId>com.helger.maven</groupId>
 					<artifactId>maven-jaxb23-plugin</artifactId>
+					<version>${project.version}</version>
+					<executions>
+						<execution>
+							<id>generate</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.helger.maven</groupId>
+					<artifactId>maven-jaxb30-plugin</artifactId>
 					<version>${project.version}</version>
 					<executions>
 						<execution>

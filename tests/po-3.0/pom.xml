@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>maven-jaxb2-plugin-tests-po-3.0</artifactId>
+	<parent>
+		<groupId>com.helger.maven</groupId>
+		<artifactId>maven-jaxb2-plugin-tests</artifactId>
+		<version>0.14.4-SNAPSHOT</version>
+	</parent>
+	<packaging>jar</packaging>
+	<name>Maven JAXB 3.x Plugin Tests [po-3.0]</name>
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.helger.maven</groupId>
+				<artifactId>maven-jaxb30-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

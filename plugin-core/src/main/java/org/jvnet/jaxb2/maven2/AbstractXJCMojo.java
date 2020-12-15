@@ -38,7 +38,7 @@ import org.jvnet.jaxb2.maven2.util.IOUtils;
 import org.sonatype.plexus.build.incremental.BuildContext;
 import org.sonatype.plexus.build.incremental.DefaultBuildContext;
 
-public abstract class AbstractXJC2Mojo <O> extends AbstractMojo implements IDependencyResourceResolver
+public abstract class AbstractXJCMojo<O> extends AbstractMojo implements IDependencyResourceResolver
 {
 
   @Parameter (defaultValue = "${settings}", readonly = true)

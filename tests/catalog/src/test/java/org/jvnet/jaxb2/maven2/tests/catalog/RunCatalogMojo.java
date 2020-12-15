@@ -4,12 +4,12 @@ import java.io.File;
 
 import org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver;
 import org.jvnet.jaxb2.maven2.test.RunXJC2Mojo;
-import org.jvnet.jaxb2.maven2.AbstractXJC2Mojo;
+import org.jvnet.jaxb2.maven2.AbstractXJCMojo;
 
 public class RunCatalogMojo extends RunXJC2Mojo {
 
 	@Override
-	protected void configureMojo(AbstractXJC2Mojo mojo) {
+	protected void configureMojo(AbstractXJCMojo mojo) {
 		super.configureMojo(mojo);
 
 		mojo
