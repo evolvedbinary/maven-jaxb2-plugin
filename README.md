@@ -1,6 +1,6 @@
 # JAXB2 Maven Plugin
 
-[![Build Status](https://travis-ci.com/phax/maven-jaxb2-plugin.svg?branch=master)](https://travis-ci.com/phax/maven-jaxb2-plugin)
+![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.helger.maven/maven-jaxb2-plugin-project.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.helger.maven%22%20AND%20a:%22maven-jaxb2-plugin-project%22)
 [![License](https://img.shields.io/badge/license-BSD%202-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
