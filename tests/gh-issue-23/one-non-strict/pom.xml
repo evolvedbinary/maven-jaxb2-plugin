@@ -26,7 +26,6 @@
 			<plugin>
 				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
-				<!--version>0.11.0</version-->
 				<executions>
 					<execution>
 						<id>generate</id>
@@ -48,4 +47,19 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>jdk11.jaxb-api.2</id>
+			<activation>
+				<jdk>[11,)</jdk>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+					<version>${jaxb2-api.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.helger.maven</groupId>
 		<artifactId>maven-jaxb2-plugin-tests</artifactId>
-		<version>0.13.2-SNAPSHOT</version>
+		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [wsdl-file]</name>
@@ -28,9 +28,27 @@
 				<groupId>com.helger.maven</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<configuration>
-					<schemaIncludes><include>*.wsdl</include></schemaIncludes>
+					<schemaIncludes>
+						<include>*.wsdl</include>
+					</schemaIncludes>
+					<schemaLanguage>WSDL</schemaLanguage>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>jdk11.jaxb-api.2</id>
+			<activation>
+				<jdk>[11,)</jdk>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+					<version>${jaxb2-api.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

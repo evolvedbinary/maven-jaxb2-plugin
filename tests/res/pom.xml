@@ -10,6 +10,21 @@
 	</parent>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [res]</name>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.helger.maven</groupId>
+				<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.helger.maven</groupId>
+				<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
@@ -18,7 +33,12 @@
 		<dependency>
 			<groupId>com.helger.maven</groupId>
 			<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
-			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.helger.maven</groupId>
+			<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.helger.maven</groupId>
@@ -26,15 +46,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.helger.maven</groupId>
-				<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -90,4 +101,19 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+		  <id>jdk11.jaxb-api.2</id>
+		  <activation>
+			<jdk>[11,)</jdk>
+		  </activation>
+		  <dependencies>
+			<dependency>
+			  <groupId>javax.xml.bind</groupId>
+			  <artifactId>jaxb-api</artifactId>
+			  <version>${jaxb2-api.version}</version>
+			</dependency>
+		  </dependencies>
+		</profile>
+	</profiles>
 </project>

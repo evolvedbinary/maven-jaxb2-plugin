@@ -14,17 +14,12 @@
 		<module>catalog</module>
 		<module>catalog-xml</module>
 		<module>episodes</module>
+		<module>gh-issue-16</module>
+		<module>gh-issue-22</module>
+		<module>gh-issue-23</module>
+		<module>gh-issue-58</module>
 		<module>issues</module>
-		<module>p o</module>
-		<module>po-2.2</module>
-		<module>po-2.3</module>
-		<module>po-3.0</module>
-		<module>po-scd</module>
-		<module>res</module>
-		<module>tse</module>
-		<module>two</module>
-		<module>xjc-simple</module>
-
+		<module>java-9</module>
 		<module>JAXB-1044</module>
 		<module>MAVEN_JAXB2_PLUGIN-49</module>
 		<module>MAVEN_JAXB2_PLUGIN-53</module>
@@ -35,11 +30,18 @@
 		<module>MAVEN_JAXB2_PLUGIN-82</module>
 		<module>MAVEN_JAXB2_PLUGIN-86</module>
 		<module>MAVEN_JAXB2_PLUGIN-87</module>
-		<module>gh-issue-16</module>
-		<module>gh-issue-22</module>
-		<module>gh-issue-23</module>
-		<module>gh-issue-58</module>
-		<module>java-9</module>
+		<module>p o</module>
+		<module>po-2.2</module>
+		<module>po-2.3</module>
+		<module>po-3.0</module>
+		<module>po-scd</module>
+		<module>res</module>
+<!--		<module>rnc</module>-->
+		<module>tse</module>
+		<module>two</module>
+<!--		<module>wsdl</module>-->
+<!--		<module>wsdl-file</module>-->
+		<module>xjc-simple</module>
 	</modules>
 	<build>
 		<pluginManagement>
