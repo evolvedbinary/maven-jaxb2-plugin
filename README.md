@@ -1,6 +1,6 @@
 # JAXB2 Maven Plugin
 
-![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)
+[![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)](https://github.com/evolvedbinary/maven-jaxb2-plugin/actions?query=workflow%3ACI)
 [![Maven Central](https://img.shields.io/maven-central/v/com.helger.maven/maven-jaxb2-plugin-project.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.helger.maven%22%20AND%20a:%22maven-jaxb2-plugin-project%22)
 [![License](https://img.shields.io/badge/license-BSD%202-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
