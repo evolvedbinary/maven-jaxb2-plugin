@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.helger</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.11.1</version>
+    <version>1.11.2</version>
   </parent>
   <groupId>com.helger.maven</groupId>
   <artifactId>maven-jaxb2-plugin-project</artifactId>
