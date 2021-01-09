@@ -14,12 +14,6 @@
 		<module>common-types</module>
 		<!-- module>service</module -->
 	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-	</dependencies>
 	<build>
 		<defaultGoal>test</defaultGoal>
 	</build>
