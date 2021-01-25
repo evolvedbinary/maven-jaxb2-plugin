@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.evolvedbinary.maven.jvnet</groupId>
 		<artifactId>jaxb-maven-plugin-tests</artifactId>
-		<version>0.14.4-SNAPSHOT</version>
+		<version>0.15.0</version>
 	</parent>
 	<artifactId>jaxb-maven-plugin-tests-MAVEN_JAXB2_PLUGIN-77</artifactId>
 	<packaging>pom</packaging>
