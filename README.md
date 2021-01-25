@@ -1,16 +1,28 @@
-# JAXB2 Maven Plugin
+# JAXB Maven Plugin
 
 [![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)](https://github.com/evolvedbinary/maven-jaxb2-plugin/actions?query=workflow%3ACI)
 [![Maven Central](https://img.shields.io/maven-central/v/com.helger.maven/maven-jaxb2-plugin-project.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.helger.maven%22%20AND%20a:%22maven-jaxb2-plugin-project%22)
 [![License](https://img.shields.io/badge/license-BSD%202-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
-## This is a fork of https://github.com/highsource/maven-jaxb2-plugin
+* **Supports JAXB 2 and JAXB 3.**
 
-Forked from 0.14.1-SNAPSHOT
+## Provenance
+This is a fork of the JAXB2 Maven Plugin from [phax/maven-jaxb2-plugin](https://github.com/evolvedbinary/maven-jaxb2-plugin),
+which is itself a fork on [highsource/maven-jaxb2-plugin](https://github.com/highsource/maven-jaxb2-plugin), and we suspect
+that was itself a fork of the [javaee/metro-maven-jaxb2-plugin](https://github.com/javaee/metro-maven-jaxb2-plugin) which originated
+from *java.net*.
 
-I created it because of https://github.com/highsource/maven-jaxb2-plugin/issues/173
+The plugin from which this was forked has been commonly known as the: *"jvmnet JAXB2 Plugin"*.
 
-I kicked JAXB 2.0 and 2.1 because I don't need it
+The purpose of our fork is to add support for JAXB 3.
+
+### Notes on Licensing
+The forks from which this project came claim that it is licensed under a [BSD-2 Clause](https://opensource.org/licenses/BSD-2-Clause) license.
+However, there is also evidence of Apache 2.0 licensed code within the project. The code in the original
+*java.net* project appears instead to have been dual-licensed as [CDDL 1.1](https://spdx.org/licenses/CDDL-1.1.html) and [GPL 2 + Classpath Exception](https://openjdk.java.net/legal/gplv2+ce.html) license.
+
+Whilst we believe it is likely that this code is Open Source and resides under a mix of the above discussed licenses, the exact licensing of
+the code remains murky at best. 
 
 ## Introduction
 
@@ -36,7 +48,7 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
       <plugin>
         <groupId>com.helger.maven</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.3</version>
+        <version>0.14.4</version>
         <executions>
           <execution>
             <goals>
@@ -58,7 +70,8 @@ If you need a specific JAXB version, you can explicitly use one of the following
 
 * `com.helger.maven:maven-jaxb22-plugin` - JAXB 2.2.
 * `com.helger.maven:maven-jaxb23-plugin` - JAXB 2.3.
-* `com.helger.maven:maven-jaxb2-plugin` - "most actual version", at the moment same as `com.helger.maven:maven-jaxb23-plugin`.
+* `com.helger.maven:maven-jaxb30-plugin` - JAXB 3.0.
+* `com.helger.maven:maven-jaxb2-plugin` - "latest 2.x version", at the moment same as `com.helger.maven:maven-jaxb23-plugin`.
 
 ### Java versions
 
@@ -77,13 +90,3 @@ Please refer to the [Wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki
 * [Sample Projects](https://github.com/highsource/maven-jaxb2-plugin/wiki/Sample-Projects)
 * [Support](https://github.com/highsource/maven-jaxb2-plugin/wiki/Support)
 * [License](https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE)
-
-## Disclaimer
-
-This project is not developed, supported or in any other way affiliated with Apache. The `org.jvnet.jaxb2.maven2:maven-jaxb2-plugin` is not an Apache product (and does not pretend to be one), it is a completely independent development.
-
-This project is also *not* developed by or affiliated with Oracle or Sun. Even if it is featured on [https://jaxb.java.net/](https://jaxb.java.net) pages, 
-
-**This plugin is in no way _official_ JAXB2 Maven plugin by Sun or Oracle.**
-
-This is a completely independent development. [I](https://github.com/highsource) am *not* an Oracle employee.
