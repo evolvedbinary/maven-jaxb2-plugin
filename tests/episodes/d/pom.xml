@@ -10,31 +10,23 @@
 	<artifactId>maven-jaxb2-plugin-tests-episodes-d</artifactId>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [episodes:d]</name>
-	<dependencies>
-		<dependency>
-			<groupId>com.helger.maven</groupId>
-			<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
 	<build>
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
 				<configuration>
 					<extension>true</extension>
 					<episodes>
 						<episode>
-							<groupId>com.helger.maven</groupId>
+							<groupId>${project.groupId}</groupId>
 							<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
 						</episode>
 					</episodes>
 					<!--plugins>
 						<plugin>
-							<groupId>com.helger.maven</groupId>
+							<groupId>${project.groupId}</groupId>
 							<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
 						</plugin>
 					</plugins-->
@@ -43,19 +35,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>jdk11.jaxb-api.22</id>
-			<activation>
-				<jdk>[11,)</jdk>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-					<version>${jaxb22.version}</version>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 </project>

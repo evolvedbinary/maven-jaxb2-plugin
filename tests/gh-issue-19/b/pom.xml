@@ -17,7 +17,7 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-testing</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -26,7 +26,7 @@
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<configuration>
 					<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>

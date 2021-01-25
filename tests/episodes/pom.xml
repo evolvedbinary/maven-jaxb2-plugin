@@ -17,12 +17,6 @@
 		<module>d</module>
 		<module>e</module>
 	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-	</dependencies>
 	<build>
 		<defaultGoal>test</defaultGoal>
 	</build>
