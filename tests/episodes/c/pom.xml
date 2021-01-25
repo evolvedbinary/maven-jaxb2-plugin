@@ -12,21 +12,10 @@
 	<name>Maven JAXB 2.x Plugin Tests [episodes:c]</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
-			<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-tests-episodes-b</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb22.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -50,14 +39,14 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
 				<configuration>
 					<extension>true</extension>
 					<catalogs>
 						<catalog>
-							<dependencyResource>                                                            
-								<groupId>com.helger.maven</groupId>
+							<dependencyResource>
+								<groupId>${project.groupId}</groupId>
 								<artifactId>maven-jaxb2-plugin-tests-episodes-b</artifactId>
 								<version>${project.version}</version>
 								<resource>catalog.cat</resource>

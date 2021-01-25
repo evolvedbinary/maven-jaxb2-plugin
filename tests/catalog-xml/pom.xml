@@ -12,12 +12,12 @@
 	<name>Maven JAXB 2.x Plugin Tests [catalog-xml]</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-testing</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-core</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
@@ -38,7 +38,7 @@
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
 					<execution>

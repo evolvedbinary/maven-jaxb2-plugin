@@ -13,12 +13,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -27,22 +27,27 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>${jaxb.version}</version>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>${jaxb2-api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.helger.maven</groupId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>maven-jaxb2-plugin-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>maven-jaxb2-plugin-testing</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -50,7 +55,25 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>analyze</id>
+						<goals>
+							<goal>analyze-only</goal>
+						</goals>
+						<configuration>
+							<ignoredUnusedDeclaredDependencies>
+								<ignoredUnusedDeclaredDependency>${project.groupId}:maven-jaxb2-plugin-tests-p_o:jar:${project.version}</ignoredUnusedDeclaredDependency>
+								<ignoredUnusedDeclaredDependency>${project.groupId}:maven-jaxb2-plugin-tests-po-scd:jar:${project.version}</ignoredUnusedDeclaredDependency>
+							</ignoredUnusedDeclaredDependencies>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
 					<execution>
@@ -80,7 +103,7 @@
 								</schema>
 								<schema>
 									<dependencyResource>
-										<groupId>com.helger.maven</groupId>
+										<groupId>${project.groupId}</groupId>
 										<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
 										<!-- Can be defined in project dependencies or dependency management -->
 										<!--version>${project.version}</version-->
@@ -89,7 +112,7 @@
 								</schema>
 								<schema>
 									<dependencyResource>
-										<groupId>com.helger.maven</groupId>
+										<groupId>${project.groupId}</groupId>
 										<artifactId>maven-jaxb2-plugin-tests-po-scd</artifactId>
 										<version>${project.version}</version>
 										<resource>purchaseorder.xsd</resource>
@@ -102,19 +125,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-		  <id>jdk11.jaxb-api.2</id>
-		  <activation>
-			<jdk>[11,)</jdk>
-		  </activation>
-		  <dependencies>
-			<dependency>
-			  <groupId>javax.xml.bind</groupId>
-			  <artifactId>jaxb-api</artifactId>
-			  <version>${jaxb2-api.version}</version>
-			</dependency>
-		  </dependencies>
-		</profile>
-	</profiles>
 </project>

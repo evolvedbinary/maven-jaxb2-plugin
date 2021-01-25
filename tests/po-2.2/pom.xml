@@ -10,34 +10,12 @@
 	</parent>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [po-2.2]</name>
-	<dependencies>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>${jaxb22.version}</version>
-		</dependency>
-	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>jdk11.jaxb-api.22</id>
-			<activation>
-				<jdk>[11,)</jdk>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-					<version>${jaxb22.version}</version>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 </project>

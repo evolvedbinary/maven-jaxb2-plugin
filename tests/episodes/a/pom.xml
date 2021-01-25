@@ -10,18 +10,11 @@
 	<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [episodes:a]</name>
-	<dependencies>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb22.version}</version>
-		</dependency>
-	</dependencies>
 	<build>
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
 			</plugin>
 		</plugins>

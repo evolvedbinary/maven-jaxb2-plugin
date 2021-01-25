@@ -14,7 +14,7 @@
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
-				<groupId>com.helger.maven</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<configuration>
 					<schemaIncludes>
