@@ -12,35 +12,35 @@
   </parent>
   <dependencies>
     <dependency>
-      <groupId>com.helger.maven</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>maven-jaxb2-plugin-sample-catalog</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.helger.maven</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>maven-jaxb2-plugin-sample-dtd</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.helger.maven</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>maven-jaxb2-plugin-sample-episode</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.helger.maven</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>maven-jaxb2-plugin-sample-jaxbplugins</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.helger.maven</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>maven-jaxb2-plugin-sample-po</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>

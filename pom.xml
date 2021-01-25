@@ -288,27 +288,27 @@
         <version>${jaxb.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.maven</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>maven-jaxb2-plugin-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.maven</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.maven</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>maven-jaxb22-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.maven</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>maven-jaxb23-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.maven</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>maven-jaxb2-plugin-testing</artifactId>
         <version>${project.version}</version>
       </dependency>
