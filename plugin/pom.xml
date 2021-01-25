@@ -87,6 +87,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
+        <configuration>
+          <mojoDependencies>
+            <mojoDependency>${project.groupId}:maven-jaxb2-plugin</mojoDependency>
+          </mojoDependencies>
+        </configuration>
       </plugin>
     </plugins>
   </build>
