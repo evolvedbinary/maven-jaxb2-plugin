@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.helger.maven</groupId>
-		<artifactId>maven-jaxb2-plugin-tests</artifactId>
+		<groupId>com.evolvedbinary.maven.jvnet</groupId>
+		<artifactId>jaxb-maven-plugin-tests</artifactId>
 		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<dependencies>
@@ -18,7 +18,7 @@
 			<version>${jaxb2-api.version}</version>
 		</dependency>
 	</dependencies>
-	<artifactId>maven-jaxb2-plugin-tests-two</artifactId>
+	<artifactId>jaxb-maven-plugin-tests-two</artifactId>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [two]</name>
 	<build>
@@ -26,7 +26,7 @@
 		<plugins>
 			<plugin>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>generate</id>

@@ -1,29 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.helger.maven</groupId>
-  <artifactId>maven-jaxb2-plugin-project</artifactId>
+  <groupId>com.evolvedbinary.maven.jvnet</groupId>
+  <artifactId>jaxb-maven-plugin-project</artifactId>
   <version>0.14.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Maven JAXB 2.x Plugin Project</name>
-  <description>Maven2 plugin for JAXB 2.x XJC compiler to generate Java sources from XML Schemas.</description>
-  <url>https://github.com/highsource/maven-jaxb2-plugin</url>
+  <name>Maven JAXB Plugin Project</name>
+  <description>Maven plugin for JAXB 2.x and 3.x XJC compiler to generate Java sources from XML Schemas.</description>
+  <url>https://github.com/evolvedbinary/jvnet-jaxb-maven-plugin</url>
 
   <licenses>
     <license>
       <name>BSD-Style License</name>
-      <url>https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE</url>
+      <url>https://github.com/evolvedbinary/jvnet-jaxb-maven-plugin/blob/main/LICENSE</url>
       <distribution>repo</distribution>
-      <comments>Maven JAXB2 Plugin license is the 3-clause BSD license which is compatible with GPL. Maven JAXB2 Plugin license does not require you to include any acknowledgments for Maven JAXB2 Plugin in advertising materials for your software.</comments>
+      <comments>Maven JAXB Plugin license is the 3-clause BSD license which is compatible with GPL. Maven JAXB2 Plugin license does not require you to include any acknowledgments for Maven JAXB2 Plugin in advertising materials for your software.</comments>
     </license>
   </licenses>
 
   <inceptionYear>2006</inceptionYear>
   <scm>
-    <connection>scm:git:git@github.com:phax/maven-jaxb2-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:phax/maven-jaxb2-plugin.git</developerConnection>
-    <url>http://github.com/phax/maven-jaxb2-plugin</url>
+    <connection>scm:git:git@github.com:evolvedbinary/jvnet-jaxb-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:evolvedbinary/jvnet-jaxb-maven-plugin.git</developerConnection>
+    <url>http://github.com/evolvedbinary/jvnet-jaxb-maven-plugin</url>
     <tag>HEAD</tag>
   </scm>
   <developers>
@@ -242,27 +242,27 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>maven-jaxb2-plugin-core</artifactId>
+        <artifactId>jaxb-maven-plugin-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>maven-jaxb22-plugin</artifactId>
+        <artifactId>jaxb22-maven-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>maven-jaxb23-plugin</artifactId>
+        <artifactId>jaxb23-maven-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>maven-jaxb2-plugin-testing</artifactId>
+        <artifactId>jaxb-maven-plugin-testing</artifactId>
         <version>${project.version}</version>
       </dependency>
 			<!-- Maven plugin and api classes -->

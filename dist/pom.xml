@@ -3,47 +3,47 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.helger.maven</groupId>
-    <artifactId>maven-jaxb2-plugin-project</artifactId>
+    <groupId>com.evolvedbinary.maven.jvnet</groupId>
+    <artifactId>jaxb-maven-plugin-project</artifactId>
     <version>0.14.4-SNAPSHOT</version>
   </parent>
 
-  <artifactId>maven-jaxb2-plugin-dist</artifactId>
+  <artifactId>jaxb-maven-plugin-dist</artifactId>
   <packaging>pom</packaging>
-  <name>Maven JAXB 2.x Plugin Dist</name>
+  <name>Maven JAXB Plugin Dist</name>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-sample-catalog</artifactId>
+      <artifactId>jaxb-maven-plugin-sample-catalog</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-sample-dtd</artifactId>
+      <artifactId>jaxb-maven-plugin-sample-dtd</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-sample-episode</artifactId>
+      <artifactId>jaxb-maven-plugin-sample-episode</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-sample-jaxbplugins</artifactId>
+      <artifactId>jaxb-maven-plugin-sample-jaxbplugins</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-sample-po</artifactId>
+      <artifactId>jaxb-maven-plugin-sample-po</artifactId>
       <type>zip</type>
       <classifier>maven-src</classifier>
       <version>${project.version}</version>

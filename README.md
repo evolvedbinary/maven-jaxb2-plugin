@@ -1,13 +1,13 @@
 # JAXB Maven Plugin
 
-[![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)](https://github.com/evolvedbinary/maven-jaxb2-plugin/actions?query=workflow%3ACI)
-[![Maven Central](https://img.shields.io/maven-central/v/com.helger.maven/maven-jaxb2-plugin-project.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.helger.maven%22%20AND%20a:%22maven-jaxb2-plugin-project%22)
+[![CI](https://github.com/evolvedbinary/maven-jaxb2-plugin/workflows/CI/badge.svg)](https://github.com/evolvedbinary/jvnet-jaxb-maven-plugin/actions?query=workflow%3ACI)
+[![Maven Central](https://img.shields.io/maven-central/v/com.evolvedbinary.maven.jvnet/jaxb-maven-plugin-project.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.evolvedbinary.maven.jvnet%22%20AND%20a:%22jaxb-maven-plugin-project%22)
 [![License](https://img.shields.io/badge/license-BSD%202-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
 * **Supports JAXB 2 and JAXB 3.**
 
 ## Provenance
-This is a fork of the JAXB2 Maven Plugin from [phax/maven-jaxb2-plugin](https://github.com/evolvedbinary/maven-jaxb2-plugin),
+This is a fork of the JAXB2 Maven Plugin from [phax/maven-jaxb2-plugin](https://github.com/phax/maven-jaxb2-plugin),
 which is itself a fork on [highsource/maven-jaxb2-plugin](https://github.com/highsource/maven-jaxb2-plugin), and we suspect
 that was itself a fork of the [javaee/metro-maven-jaxb2-plugin](https://github.com/javaee/metro-maven-jaxb2-plugin) which originated
 from *java.net*.
@@ -26,7 +26,7 @@ the code remains murky at best.
 
 ## Introduction
 
-Welcome to the `com.helger.maven:maven-jaxb2-plugin`, the most advanced and feature-full Maven plugin for XML Schema compilation.
+Welcome to the JAXB Maven Plugin, the most advanced and feature-full Maven plugin for XML Schema compilation.
 
 This Maven plugin wraps and enhances the [JAXB](https://jaxb.java.net/) [Schema Compiler (XJC)](http://docs.oracle.com/javase/6/docs/technotes/tools/share/xjc.html) and allows
 compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Maven builds.
@@ -39,6 +39,7 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
 * Put your schemas (`*.xsd`) and bindings (`*.xjb`) into the `src/main/resources` folder.
 * Add the plugin to your `pom.xml`:
 
+### For JAXB 3:
 ```xml
 <project ...>
   ...
@@ -46,9 +47,9 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
     <plugins>
       ...
       <plugin>
-        <groupId>com.helger.maven</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.4</version>
+        <groupId>com.evolvedbinary.maven.jvnet</groupId>
+        <artifactId>jaxb30-maven-plugin</artifactId>
+        <version>0.15.0</version>
         <executions>
           <execution>
             <goals>
@@ -64,14 +65,17 @@ compiling XML Schemas (as well as WSDL, DTDs, RELAX NG) into Java classes in Mav
 </project>
 ```
 
+### For JAXB 2:
+Use: `<artifactId>jaxb2-maven-plugin</artifactId>` instead.
+
 ### JAXB Versions
 
 If you need a specific JAXB version, you can explicitly use one of the following variants:
 
-* `com.helger.maven:maven-jaxb22-plugin` - JAXB 2.2.
-* `com.helger.maven:maven-jaxb23-plugin` - JAXB 2.3.
-* `com.helger.maven:maven-jaxb30-plugin` - JAXB 3.0.
-* `com.helger.maven:maven-jaxb2-plugin` - "latest 2.x version", at the moment same as `com.helger.maven:maven-jaxb23-plugin`.
+* `com.evolvedbinary.maven.jvnet:jaxb30-maven-plugin` - JAXB 3.0.
+* `com.evolvedbinary.maven.jvnet:jaxb23-maven-plugin` - JAXB 2.3.
+* `com.evolvedbinary.maven.jvnet:jaxb22-maven-plugin` - JAXB 2.2.
+* `com.evolvedbinary.maven.jvnet:jaxb2-maven-plugin` - "latest 2.x version"; at the moment this is same as `com.evolvedbinary.maven.jvnet:jaxb23-maven-plugin`.
 
 ### Java versions
 
@@ -89,4 +93,4 @@ Please refer to the [Wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki
 * [FAQ](https://github.com/highsource/maven-jaxb2-plugin/wiki/FAQ)
 * [Sample Projects](https://github.com/highsource/maven-jaxb2-plugin/wiki/Sample-Projects)
 * [Support](https://github.com/highsource/maven-jaxb2-plugin/wiki/Support)
-* [License](https://github.com/highsource/maven-jaxb2-plugin/blob/master/LICENSE)
+* [License](https://github.com/evolvedbinary/jvnet-jaxb-maven-plugin/blob/main/LICENSE)

@@ -2,10 +2,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>maven-jaxb2-plugin-tests-MAVEN_JAXB2_PLUGIN-70</artifactId>
+	<artifactId>jaxb-maven-plugin-tests-MAVEN_JAXB2_PLUGIN-70</artifactId>
 	<parent>
-		<groupId>com.helger.maven</groupId>
-		<artifactId>maven-jaxb2-plugin-tests</artifactId>
+		<groupId>com.evolvedbinary.maven.jvnet</groupId>
+		<artifactId>jaxb-maven-plugin-tests</artifactId>
 		<version>0.14.4-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
@@ -18,7 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
+			<artifactId>jaxb-maven-plugin-tests-p_o</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -36,7 +36,7 @@
 						</goals>
 						<configuration>
 						<ignoredUnusedDeclaredDependencies>
-						<ignoredUnusedDeclaredDependency>${project.groupId}:maven-jaxb2-plugin-tests-p_o:jar:${project.version}</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>${project.groupId}:jaxb-maven-plugin-tests-p_o:jar:${project.version}</ignoredUnusedDeclaredDependency>
 							</ignoredUnusedDeclaredDependencies>
 						</configuration>
 					</execution>
@@ -44,7 +44,7 @@
 			</plugin>
 			<plugin>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>generate</id>
@@ -56,7 +56,7 @@
 								<schema>
 									<dependencyResource>
 										<groupId>${project.groupId}</groupId>
-										<artifactId>maven-jaxb2-plugin-tests-p_o</artifactId>
+										<artifactId>jaxb-maven-plugin-tests-p_o</artifactId>
 										<version>${project.version}</version>
 										<resource>purchaseorder.xsd</resource>
 									</dependencyResource>

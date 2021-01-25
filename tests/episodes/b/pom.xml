@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.helger.maven</groupId>
-		<artifactId>maven-jaxb2-plugin-tests-episodes</artifactId>
+		<groupId>com.evolvedbinary.maven.jvnet</groupId>
+		<artifactId>jaxb-maven-plugin-tests-episodes</artifactId>
 		<version>0.14.4-SNAPSHOT</version>
 	</parent>
-	<artifactId>maven-jaxb2-plugin-tests-episodes-b</artifactId>
+	<artifactId>jaxb-maven-plugin-tests-episodes-b</artifactId>
 	<packaging>jar</packaging>
 	<name>Maven JAXB 2.x Plugin Tests [episodes:b]</name>
 	<build>
@@ -15,13 +15,13 @@
 		<plugins>
 			<plugin>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>maven-jaxb22-plugin</artifactId>
+				<artifactId>jaxb22-maven-plugin</artifactId>
 				<configuration>
 					<extension>true</extension>
 					<episodes>
 						<episode>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>maven-jaxb2-plugin-tests-episodes-a</artifactId>
+							<artifactId>jaxb-maven-plugin-tests-episodes-a</artifactId>
 						</episode>
 					</episodes>
 					<catalog>src/main/resources/catalog.cat</catalog>

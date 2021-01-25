@@ -2,14 +2,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>maven-jaxb2-plugin-tests</artifactId>
-	<packaging>pom</packaging>
-	<name>Maven JAXB 2.x Plugin Tests</name>
+
 	<parent>
-		<groupId>com.helger.maven</groupId>
-		<artifactId>maven-jaxb2-plugin-project</artifactId>
+		<groupId>com.evolvedbinary.maven.jvnet</groupId>
+		<artifactId>jaxb-maven-plugin-project</artifactId>
 		<version>0.14.4-SNAPSHOT</version>
 	</parent>
+
+	<artifactId>jaxb-maven-plugin-tests</artifactId>
+	<packaging>pom</packaging>
+	<name>Maven JAXB Plugin Tests</name>
 	<modules>
 		<module>catalog</module>
 		<module>catalog-xml</module>
@@ -48,7 +50,7 @@
 			<plugins>
 				<plugin>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>maven-jaxb2-plugin</artifactId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
 					<version>${project.version}</version>
 					<executions>
 						<execution>
@@ -62,7 +64,7 @@
 				</plugin>
 				<plugin>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>maven-jaxb22-plugin</artifactId>
+					<artifactId>jaxb22-maven-plugin</artifactId>
 					<version>${project.version}</version>
 					<executions>
 						<execution>
@@ -75,7 +77,7 @@
 				</plugin>
 				<plugin>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>maven-jaxb23-plugin</artifactId>
+					<artifactId>jaxb23-maven-plugin</artifactId>
 					<version>${project.version}</version>
 					<executions>
 						<execution>
@@ -88,7 +90,7 @@
 				</plugin>
 				<plugin>
 					<groupId>${project.groupId}</groupId>
-					<artifactId>maven-jaxb30-plugin</artifactId>
+					<artifactId>jaxb30-maven-plugin</artifactId>
 					<version>${project.version}</version>
 					<executions>
 						<execution>

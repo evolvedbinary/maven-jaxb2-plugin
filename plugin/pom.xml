@@ -2,15 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.helger.maven</groupId>
-    <artifactId>maven-jaxb2-plugin-project</artifactId>
+    <groupId>com.evolvedbinary.maven.jvnet</groupId>
+    <artifactId>jaxb-maven-plugin-project</artifactId>
     <version>0.14.4-SNAPSHOT</version>
   </parent>
 
-  <artifactId>maven-jaxb2-plugin</artifactId>
+  <artifactId>jaxb2-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>Maven JAXB 2.x Plugin</name>
-  <url>https://github.com/highsource/maven-jaxb2-plugin</url>
 
   <prerequisites>
     <maven>${maven.version}</maven>
@@ -19,7 +18,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb2-plugin-core</artifactId>
+      <artifactId>jaxb-maven-plugin-core</artifactId>
       <version>${project.version}</version>
       <exclusions>
         <exclusion>
@@ -30,7 +29,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>maven-jaxb23-plugin</artifactId>
+      <artifactId>jaxb23-maven-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
 
