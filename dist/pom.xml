@@ -1,15 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.helger.maven</groupId>
-  <artifactId>maven-jaxb2-plugin-dist</artifactId>
-  <packaging>pom</packaging>
-  <name>Maven JAXB 2.x Plugin Dist</name>
+
   <parent>
     <groupId>com.helger.maven</groupId>
     <artifactId>maven-jaxb2-plugin-project</artifactId>
-    <version>0.14.2-SNAPSHOT</version>
+    <version>0.14.4-SNAPSHOT</version>
   </parent>
+
+  <artifactId>maven-jaxb2-plugin-dist</artifactId>
+  <packaging>pom</packaging>
+  <name>Maven JAXB 2.x Plugin Dist</name>
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
