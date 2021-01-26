@@ -85,6 +85,16 @@ Supported Java versions are `1.8` and onwards.
 
 Please refer to the [Wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki) for the full documentation.
 
+### Support
+Whilst this fork is an Open Source project, developing this plugin is not
+our key occupation. We are happy for users to open issues, however we make
+no claims that we will investigate or resolve them.
+
+We will gladly accept and merge Pull-Requests that address issues, but they
+must be accompanied by tests and be compatible with Java 8+.
+
+The original author of the plugin *may* also be able to offer you some support, see [Support](https://github.com/highsource/maven-jaxb2-plugin/wiki/Support).
+
 * [User Guide](https://github.com/highsource/maven-jaxb2-plugin/wiki/User-Guide)
 * Maven Documentation  (Work in progress)
 * [Configuration Cheat Sheet](https://github.com/highsource/maven-jaxb2-plugin/wiki/Configuration-Cheat-Sheet)
@@ -92,5 +102,4 @@ Please refer to the [Wiki](https://github.com/highsource/maven-jaxb2-plugin/wiki
 * [Best Practices](https://github.com/highsource/maven-jaxb2-plugin/wiki/Best-Practices) (Work in progress)
 * [FAQ](https://github.com/highsource/maven-jaxb2-plugin/wiki/FAQ)
 * [Sample Projects](https://github.com/highsource/maven-jaxb2-plugin/wiki/Sample-Projects)
-* [Support](https://github.com/highsource/maven-jaxb2-plugin/wiki/Support)
 * [License](https://github.com/evolvedbinary/jvnet-jaxb-maven-plugin/blob/main/LICENSE)
